@@ -4,7 +4,27 @@ class M_model extends CI_Model{
     function get_data($table){
         return $this->db->get($table);
     }
-
+    public function register_user($email,$username,$nama_depan,$nama_belakang, $password, $role) {
+        $data = array(
+            'email' => $email,
+            'username' => $username,
+            'nama_depan' => $nama_depan,
+            'nama_belakang' => $nama_belakang,
+            'password' => $password,
+            'role' => $role
+        );
+        // Simpan data ke dalam tabel pengguna (ganti 'users' sesuai dengan nama tabel Anda)
+        $this->db->insert('user', $data);
+    }
+    public function getData()
+    {
+        // Query database untuk mengambil data
+        $this->db->select('absensi.*,user.nama_depan, user.nama_belakang');
+        $this->db->from('absensi');
+        $this->db->join('user', 'absensi.id_karyawan = user.id', 'left');
+        $query = $this->db->get();
+        return $query->result();
+    }
     function getwhere($table, $data)
     {
         return $this->db->get_where($table, $data);
