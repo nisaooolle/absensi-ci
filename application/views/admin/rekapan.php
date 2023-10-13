@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
     @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
@@ -363,6 +362,7 @@
         background-color: #e74c3c !important;
         border-radius: 50% !important;
         height: 25px !important;
+
         width: 25px !important;
         padding: 2px !important;
         font-size: 11px !important;
@@ -431,7 +431,7 @@
 
     .table td,
     .table th {
-        padding: 25px 20px;
+        padding: 25px 29px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -446,80 +446,52 @@
         color: #fff;
     }
 
-    .texta {
-        margin-left: 30px;
-        margin-top: 30px;
-    }
-
-    .submit {
-        border: none;
-        padding: 15px 70px;
-        border-radius: 8px;
-        display: block;
-        margin: auto;
-        margin-top: 20px;
-        margin-left: 10px;
-        background-color: #6E7C7C;
-        color: #fff;
-        font-weight: bold;
-        -webkit-box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-        -moz-box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-        box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-    }
-
-    .submit:hover {
-        background-color: #A6A9B6;
-    }
-
-    label {
-        font-size: 25px;
-    }
     @media (max-width: 600px) {
 
 
-tbody {
-    text-align: left;
-}
+        tbody {
+            text-align: left;
+        }
 
-.option-select {
-    font-size: 12px;
-}
+        .option-select {
+            font-size: 12px;
+        }
 
-.td {
-    padding-right: none;
-    display: flex;
-    justify-content: left;
-}
+        .td {
+            padding-right: none;
+            display: flex;
+            justify-content: left;
+        }
 
-.responsive-3 {
-    width: 100%;
-}
+        .responsive-3 {
+            width: 100%;
+        }
 
-th {
-    display: none;
-}
+        th {
+            display: none;
+        }
 
-td {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: 15ch auto;
-    padding: 0.75em 1rem;
-}
+        td {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 15ch auto;
+            padding: 0.75em 1rem;
+        }
 
-td:first-child {
-    padding-top: 2rem;
-}
+        td:first-child {
+            padding-top: 2rem;
+        }
 
-td::before {
-    content: attr(data-cell) "  : ";
-    font-weight: bold;
-}
-}
+        td::before {
+            content: attr(data-cell) "  : ";
+            font-weight: bold;
+        }
+    }
 </style>
 
 <body>
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
-        <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+        <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
             <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
                 <img class="rounded-pill img-fluid" width="65" src="https://uniim1.shutterfly.com/ng/services/mediarender/THISLIFE/021036514417/media/23148907008/medium/1501685726/enhance" alt="">
@@ -527,23 +499,17 @@ td::before {
                     <h5 class="fs-6 mb-0">
                         <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>
                     </h5>
+                    <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit amet consectetur.</p> -->
                 </div>
             </div>
-        <?php endforeach; ?>
-        <ul class="categories list-unstyled">
-            <li>
-                <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/karyawan">Dashboard</a>
-            </li>
-            <li class="">
-                <i class="fa-solid fa-clock-rotate-left"></i><a href="history_absen">History Absen</a>
-            </li>
-            <li>
-                <i class="fa-solid fa-bars"></i><a href="menu_absensi"> Menu Absensi</a>
-            </li>
-            <li>
-                <i class="fa-solid fa-bars"></i><a href="menu_izin">Menu Izin</a>
-            </li>
-        </ul>
+            <ul class="categories list-unstyled">
+                <li>
+                    <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+                </li>
+            </ul>
     </aside>
 
     <section id="wrapper">
@@ -551,9 +517,9 @@ td::before {
             <div class="container-fluid mx-2">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="uil-bars text-white"></i>
+                        <i class="fa-solid fa-caret-down"></i>
                     </button>
-                    <a class="navbar-brand" href="#">absen<span class="main-color">si</span></a>
+                    <a class="navbar-brand" href="#">admin<span class="main-color">kit</span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="toggle-navbar">
                     <ul class="navbar-nav ms-auto">
@@ -563,7 +529,7 @@ td::before {
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="profil">My account</a>
+                                    <a class="dropdown-item" href="karyawan/profil">My account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -582,164 +548,143 @@ td::before {
             </div>
         </nav>
 
-        <div class="texta">
-            <?php foreach ($absen as $karyawan) : ?>
-                <form action="<?php echo base_url('karyawan/aksi_update_absensi') ?>" method="post">
-                    <label for="" style="color:#6E7C7C;font-weight: bold;">Absen Kegiatan</label>
-                    <input type="hidden" name="id" value="<?php echo $karyawan->id ?>">
-                    <br>
-                    <textarea name="kegiatan" id="" cols="100" rows="10"><?php echo $karyawan->kegiatan ?></textarea>
-                </form>
-        </div>
-        <div class="flex px-3">
-            <button type="button" class="btn btn-sm btn-danger text-danger-hover-none"><a class="text-light text-decoration-none" href="/absensi-codeigniter3/karyawan/history_absen">
-                    Cancel</a>
-            </button>
-            <?php if ($karyawan->status == "done") : ?>
-                <button type="button" class="btn btn-sm btn-success text-danger-hover-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Izin
-                </button>
-            <?php elseif ($karyawan->keterangan_izin != "-") : ?>
-                <button type="button" onclick="tampilSweetAlertKeterangan()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php else : ?>
-                <button type="button" onclick="tampilSweetAlert()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php endif; ?>
-            <button type="submit" name="submit" class="btn btn-sm btn-primary text-danger-hover-none">
-                Submit
-            </button>
-        </div>
-        </form>
-    <?php endforeach ?>
-    </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" method="post" action="<?php echo base_url('karyawan/aksi_keterangan_izin') ?>" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="p-4">
+            <div class="welcome">
+                <div class="content rounded-3 p-3">
+                    <h1 class="fs-3">Welcome to Dashboard</h1>
+                    <p class="mb-0">Hello <?php echo $data_akun->username ?>, welcome to your awesome dashboard!</p>
                 </div>
-                <?php foreach ($karyawan1 as $keterangan) : ?>
-                    <input type="hidden" name="id" value="<?php echo $keterangan->id ?>">
-                    <div class="modal-body">
-                        <label for="" class="form-label">Keterangan izin</label>
-                        <textarea cols="40" rows="10" name="keterangan_izin" class="form-control"><?php echo $keterangan->keterangan_izin ?></textarea>
+            </div>
+        <?php endforeach; ?>
+
+        <section class="statistics mt-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                        <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">1,245</h3> <span class="d-block ms-2">Total Masuk Kerja</span>
+                            </div>
+                            <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+                        </div>
                     </div>
-                <?php endforeach; ?>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                    <!-- <button type="submit" name="submit" class="btn btn-primary">Save changes</button> -->
                 </div>
-            </form>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <?php if ($this->session->flashdata('gagal_ijin')) : ?>
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                        <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">34</h3> <span class="d-block ms-2">Total Cuti</span>
+                            </div>
+                            <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center p-3">
+                        <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">5,245</h3> <span class="d-block ms-2">Total Users</span>
+                            </div>
+                            <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts mt-4">
+            <a href="<?php echo base_url('admin/export_rekapan') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+            <br>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Karyawan</th>
+                        <th>Kegiatan</th>
+                        <th>Date</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Pulang</th>
+                        <th>Keterangan Izin</th>
+                        <th>Status</th>
+                    </tr>
+                    <?php $no = 0;
+                    foreach ($karyawan as $row) : $no++ ?>
+                        <tr>
+                            <td data-cell="No">
+                                <?php echo $no ?>
+                            </td>
+                            <td data-cell="Nama Karyawan">
+                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                            </td>
+                            <td data-cell="Kegiatan">
+                                <?php echo $row->kegiatan; ?>
+                            </td>
+                            <td data-cell="Date">
+                                <?php echo $row->date; ?>
+                            </td>
+                            <td data-cell="Jam masuk">
+                                <?php echo $row->jam_masuk; ?>
+                            </td>
+                            <td data-cell="Jam Pulang">
+                                <?php echo $row->jam_pulang; ?>
+                            </td>
+                            <td data-cell="Keterangan izin">
+                                <?php echo $row->keterangan_izin; ?>
+                            </td>
+                            <td data-cell="Status">
+                                <?php echo $row->status; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </section>
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal izin',
-                text: '<?= $this->session->flashdata('gagal_ijin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata('gagal_izin')) : ?>
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: '<?= $this->session->flashdata('gagal_izin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <script>
-        function tampilSweetAlert() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Tidak bisa izin karena anda belum pulang',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function tampilSweetAlertKeterangan() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Anda sudah izin hari ini',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function $(selector) {
-            return document.querySelector(selector)
-        }
-
-        function find(el, selector) {
-            let finded
-            return (finded = el.querySelector(selector)) ? finded : null
-        }
-
-        function siblings(el) {
-            const siblings = []
-            for (let sibling of el.parentNode.children) {
-                if (sibling !== el) {
-                    siblings.push(sibling)
-                }
+            function $(selector) {
+                return document.querySelector(selector)
             }
-            return siblings
-        }
 
-        const showAsideBtn = $('.show-side-btn')
-        const sidebar = $('.sidebar')
-        const wrapper = $('#wrapper')
-
-        showAsideBtn.addEventListener('click', function() {
-            $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
-            wrapper.classList.toggle('fullwidth')
-        })
-
-        if (window.innerWidth < 767) {
-            sidebar.classList.add('show-sidebar');
-        }
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 767) {
-                sidebar.classList.remove('show-sidebar')
+            function find(el, selector) {
+                let finded
+                return (finded = el.querySelector(selector)) ? finded : null
             }
-        })
-        $('.sidebar .close-aside').addEventListener('click', function() {
-            $(`#${this.dataset.close}`).classList.add('show-sidebar')
-            wrapper.classList.remove('margin')
-        })
-    </script>
 
+            function siblings(el) {
+                const siblings = []
+                for (let sibling of el.parentNode.children) {
+                    if (sibling !== el) {
+                        siblings.push(sibling)
+                    }
+                }
+                return siblings
+            }
+
+            const showAsideBtn = $('.show-side-btn')
+            const sidebar = $('.sidebar')
+            const wrapper = $('#wrapper')
+
+            showAsideBtn.addEventListener('click', function() {
+                $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+                wrapper.classList.toggle('fullwidth')
+            })
+
+            if (window.innerWidth < 767) {
+                sidebar.classList.add('show-sidebar');
+            }
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 767) {
+                    sidebar.classList.remove('show-sidebar')
+                }
+            })
+            $('.sidebar .close-aside').addEventListener('click', function() {
+                $(`#${this.dataset.close}`).classList.add('show-sidebar')
+                wrapper.classList.remove('margin')
+            })
+        </script>
 </body>
 
 </html>

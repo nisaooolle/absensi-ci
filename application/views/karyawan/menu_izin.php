@@ -474,47 +474,6 @@
     label {
         font-size: 25px;
     }
-    @media (max-width: 600px) {
-
-
-tbody {
-    text-align: left;
-}
-
-.option-select {
-    font-size: 12px;
-}
-
-.td {
-    padding-right: none;
-    display: flex;
-    justify-content: left;
-}
-
-.responsive-3 {
-    width: 100%;
-}
-
-th {
-    display: none;
-}
-
-td {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: 15ch auto;
-    padding: 0.75em 1rem;
-}
-
-td:first-child {
-    padding-top: 2rem;
-}
-
-td::before {
-    content: attr(data-cell) "  : ";
-    font-weight: bold;
-}
-}
 </style>
 
 <body>
@@ -581,164 +540,58 @@ td::before {
                 </div>
             </div>
         </nav>
-
         <div class="texta">
-            <?php foreach ($absen as $karyawan) : ?>
-                <form action="<?php echo base_url('karyawan/aksi_update_absensi') ?>" method="post">
-                    <label for="" style="color:#6E7C7C;font-weight: bold;">Absen Kegiatan</label>
-                    <input type="hidden" name="id" value="<?php echo $karyawan->id ?>">
-                    <br>
-                    <textarea name="kegiatan" id="" cols="100" rows="10"><?php echo $karyawan->kegiatan ?></textarea>
-                </form>
-        </div>
-        <div class="flex px-3">
-            <button type="button" class="btn btn-sm btn-danger text-danger-hover-none"><a class="text-light text-decoration-none" href="/absensi-codeigniter3/karyawan/history_absen">
-                    Cancel</a>
-            </button>
-            <?php if ($karyawan->status == "done") : ?>
-                <button type="button" class="btn btn-sm btn-success text-danger-hover-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Izin
-                </button>
-            <?php elseif ($karyawan->keterangan_izin != "-") : ?>
-                <button type="button" onclick="tampilSweetAlertKeterangan()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php else : ?>
-                <button type="button" onclick="tampilSweetAlert()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php endif; ?>
-            <button type="submit" name="submit" class="btn btn-sm btn-primary text-danger-hover-none">
-                Submit
-            </button>
-        </div>
-        </form>
-    <?php endforeach ?>
-    </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" method="post" action="<?php echo base_url('karyawan/aksi_keterangan_izin') ?>" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <?php foreach ($karyawan1 as $keterangan) : ?>
-                    <input type="hidden" name="id" value="<?php echo $keterangan->id ?>">
-                    <div class="modal-body">
-                        <label for="" class="form-label">Keterangan izin</label>
-                        <textarea cols="40" rows="10" name="keterangan_izin" class="form-control"><?php echo $keterangan->keterangan_izin ?></textarea>
-                    </div>
-                <?php endforeach; ?>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                    <!-- <button type="submit" name="submit" class="btn btn-primary">Save changes</button> -->
-                </div>
+            <form action="">
+                <label for="" style="color:#6E7C7C;
+    font-weight: bold;">Keterangan Izin / Cuti</label>
+                <br>
+                <textarea name="izin" id="" cols="100" rows="10"></textarea>
+                <button class="submit">SUBMIT</button>
             </form>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <?php if ($this->session->flashdata('gagal_ijin')) : ?>
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal izin',
-                text: '<?= $this->session->flashdata('gagal_ijin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata('gagal_izin')) : ?>
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: '<?= $this->session->flashdata('gagal_izin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <script>
-        function tampilSweetAlert() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Tidak bisa izin karena anda belum pulang',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function tampilSweetAlertKeterangan() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Anda sudah izin hari ini',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function $(selector) {
-            return document.querySelector(selector)
-        }
-
-        function find(el, selector) {
-            let finded
-            return (finded = el.querySelector(selector)) ? finded : null
-        }
-
-        function siblings(el) {
-            const siblings = []
-            for (let sibling of el.parentNode.children) {
-                if (sibling !== el) {
-                    siblings.push(sibling)
-                }
+            function $(selector) {
+                return document.querySelector(selector)
             }
-            return siblings
-        }
 
-        const showAsideBtn = $('.show-side-btn')
-        const sidebar = $('.sidebar')
-        const wrapper = $('#wrapper')
-
-        showAsideBtn.addEventListener('click', function() {
-            $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
-            wrapper.classList.toggle('fullwidth')
-        })
-
-        if (window.innerWidth < 767) {
-            sidebar.classList.add('show-sidebar');
-        }
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 767) {
-                sidebar.classList.remove('show-sidebar')
+            function find(el, selector) {
+                let finded
+                return (finded = el.querySelector(selector)) ? finded : null
             }
-        })
-        $('.sidebar .close-aside').addEventListener('click', function() {
-            $(`#${this.dataset.close}`).classList.add('show-sidebar')
-            wrapper.classList.remove('margin')
-        })
-    </script>
+
+            function siblings(el) {
+                const siblings = []
+                for (let sibling of el.parentNode.children) {
+                    if (sibling !== el) {
+                        siblings.push(sibling)
+                    }
+                }
+                return siblings
+            }
+
+            const showAsideBtn = $('.show-side-btn')
+            const sidebar = $('.sidebar')
+            const wrapper = $('#wrapper')
+
+            showAsideBtn.addEventListener('click', function() {
+                $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+                wrapper.classList.toggle('fullwidth')
+            })
+
+            if (window.innerWidth < 767) {
+                sidebar.classList.add('show-sidebar');
+            }
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 767) {
+                    sidebar.classList.remove('show-sidebar')
+                }
+            })
+            $('.sidebar .close-aside').addEventListener('click', function() {
+                $(`#${this.dataset.close}`).classList.add('show-sidebar')
+                wrapper.classList.remove('margin')
+            })
+        </script>
 
 </body>
 

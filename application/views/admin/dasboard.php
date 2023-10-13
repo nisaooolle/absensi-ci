@@ -5,229 +5,433 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+  @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
+
+  :root {
+    --dk-gray-100: #F3F4F6;
+    --dk-gray-200: #E5E7EB;
+    --dk-gray-300: #D1D5DB;
+    --dk-gray-400: #9CA3AF;
+    --dk-gray-500: #6B7280;
+    --dk-gray-600: #4B5563;
+    --dk-gray-700: #374151;
+    --dk-gray-800: #1F2937;
+    --dk-gray-900: #111827;
+    --dk-dark-bg: #313348;
+    /* --dk-darker-bg: #2a2b3d; */
+    --navbar-bg-color: #252636;
+    --sidebar-bg-color: #252636;
+    --sidebar-width: 250px;
+  }
 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
   }
 
-  :root {
-    --grey-color: #b1adad;
-    --border-color: #e7e8ea;
+  body {
+    font-family: 'Inter', sans-serif;
+    /* background-color: var(--dk-darker-bg); */
+    font-size: .925rem;
   }
 
-  .container {
-    display: flex;
-    height: 100vh;
-    letter-spacing: 1px;
-  }
-
-
-  /*----- Dark Mode -----*/
-
-  .dark-mode {
-    background: #000;
-    color: #fff;
-  }
-
-
-  /*----- Left SideBar -----*/
-
-  .left_sidebar {
-    flex-basis: 20%;
-    position: sticky;
-    top: 0px;
-    align-self: flex-start;
+  #wrapper {
+    margin-left: var(--sidebar-width);
     transition: all .3s ease-in-out;
   }
 
-  .left_sidebar .close_hamburger_btn {
+  #wrapper.fullwidth {
+    margin-left: 0;
+  }
+
+
+
+  /** --------------------------------
+ -- Sidebar
+-------------------------------- */
+  .sidebar {
+    background-color: var(--sidebar-bg-color);
+    width: var(--sidebar-width);
+    transition: all .3s ease-in-out;
+    transform: translateX(0);
+    z-index: 9999999
+  }
+
+  .sidebar .close-aside {
     position: absolute;
-    top: 30px;
-    left: 30px;
-    font-size: 34px;
+    top: 7px;
+    right: 7px;
     cursor: pointer;
-    color: #000;
-    display: none;
+    color: #EEE;
   }
 
-  .left_sidebar .logo h2 {
-    padding: 20px 30px;
-    font-weight: 600;
-    font-size: 32px;
-    font-style: italic;
+  .sidebar .sidebar-header {
+    border-bottom: 1px solid #2a2b3c
   }
 
-  .left_sidebar .menu_items .menu_item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 17px;
-    color: var(--grey-color);
-    padding: 20px 30px;
-    cursor: pointer;
+  .sidebar .sidebar-header h5 a {
+    color: var(--dk-gray-300)
   }
 
-
-  /*----- Main Content -----*/
-
-  .main_content {
-    flex-basis: 60%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 0 20px;
-    transition: all .3s ease-in-out;
-    overflow-y: scroll;
+  .sidebar .sidebar-header p {
+    color: var(--dk-gray-400);
+    font-size: .825rem;
   }
 
-  .main_content .main_navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+  .sidebar .search .form-control~i {
+    color: #2b2f3a;
+    right: 40px;
+    top: 22px;
   }
 
-  .main_content .main_navbar .dark_mode_icon i {
-    background: var(--border-color);
-    color: #000;
-    font-size: 18px;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 50%;
-    cursor: pointer;
+  .sidebar>ul>li {
+    padding: .7rem 1.75rem;
   }
 
-  .main_content .main_navbar .dark_mode_icon .bx-sun {
-    display: none;
+  .sidebar ul>li>a {
+    color: var(--dk-gray-400);
+    text-decoration: none;
   }
 
-  .main_content .left_right_sidebar_opener {
-    font-size: 45px;
-    cursor: pointer;
-    margin-top: 20px;
-    display: none;
-  }
-
-  .main_content .left_right_sidebar_opener .student {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .main_content .left_right_sidebar_opener .student img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-position: center;
-    margin-top: 15px;
-  }
-
-  .main_content .left_right_sidebar_opener .student p {
-    font-size: 18px;
-  }
-
-  .search_box {
-    background: var(--border-color);
-    display: flex;
-    gap: 15px;
-    padding: 12px;
-    margin-top: 20px;
-    align-items: center;
-    color: #000;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 20px;
-    width: 90%;
-  }
-
-  .search_box input {
-    width: 100%;
-    border: none;
-    background: #e9eaec;
-    outline: none;
-  }
-
-  .menu_item_name_and_filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 4px 0;
-  }
-
-  .menu_item_name_and_filter .menu_item_name h2 {
-    font-weight: 600;
-    font-size: 24px;
-  }
-
-  .menu_item_name_and_filter .filter_and_sort {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .menu_item_name_and_filter .filter_and_sort .sort_and_filter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--border-color);
-    color: #000;
-    padding: 5px 10px;
-    border-radius: 5px;
+  /* Start numbers */
+  .sidebar ul>li>a>.num {
+    line-height: 0;
+    border-radius: 3px;
     font-size: 14px;
-    cursor: pointer;
+    padding: 0px 5px
   }
 
-  .tabs {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    margin-left: 15px;
+  .sidebar ul>li>i {
+    font-size: 18px;
+    margin-right: .7rem;
+    color: var(--dk-gray-500);
   }
 
-  .tabs .tab_name {
-    display: flex;
-    gap: 50px;
-    width: 100%;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 15px;
-    cursor: pointer;
+  .sidebar ul>li.has-dropdown>a:after {
+    content: '\eb3a';
+    font-family: unicons-line;
+    font-size: 1rem;
+    line-height: 1.8;
+    float: right;
+    color: var(--dk-gray-500);
+    transition: all .3s ease-in-out;
+  }
+
+  .sidebar ul .opened>a:after {
+    transform: rotate(-90deg);
+  }
+
+  /* Start dropdown menu */
+  .sidebar ul .sidebar-dropdown {
+    padding-top: 10px;
+    padding-left: 30px;
+    display: none;
+  }
+
+  .sidebar ul .sidebar-dropdown.active {
+    display: block;
+  }
+
+  .sidebar ul .sidebar-dropdown>li>a {
+    font-size: .85rem;
+    padding: .5rem 0;
+    display: block;
+  }
+
+  /* End dropdown menu */
+
+  .show-sidebar {
+    transform: translateX(-270px);
+  }
+
+  @media (max-width: 767px) {
+    .sidebar ul>li {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .sidebar .search {
+      padding: 10px 0 10px 30px
+    }
+  }
+
+
+
+
+  /** --------------------------------
+ -- welcome
+-------------------------------- */
+  .welcome {
+    color: var(--dk-gray-300);
+  }
+
+  .welcome .content {
+    background-color: var(--dk-dark-bg);
+  }
+
+  .welcome p {
+    color: var(--dk-gray-400);
+  }
+
+
+
+
+  /** --------------------------------
+ -- Statistics
+-------------------------------- */
+  .statistics {
+    color: var(--dk-gray-200);
+  }
+
+  .statistics .box {
+    background-color: var(--dk-dark-bg);
+  }
+
+  .statistics .box i {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
+
+  .statistics .box p {
+    color: var(--dk-gray-400);
+  }
+
+
+
+
+  /** --------------------------------
+ -- Charts
+-------------------------------- */
+  .charts .chart-container {
+    background-color: var(--dk-dark-bg);
+  }
+
+  .charts .chart-container h3 {
+    color: var(--dk-gray-400)
+  }
+
+
+
+
+  /** --------------------------------
+ -- users
+-------------------------------- */
+  .admins .box .admin {
+    background-color: var(--dk-dark-bg);
+  }
+
+  .admins .box h3 {
+    color: var(--dk-gray-300);
+  }
+
+  .admins .box p {
+    color: var(--dk-gray-400)
+  }
+
+
+
+
+  /** --------------------------------
+ -- statis
+-------------------------------- */
+  .statis {
+    color: var(--dk-gray-100);
+  }
+
+  .statis .box {
     position: relative;
+    overflow: hidden;
+    border-radius: 3px;
   }
 
-  .tabs .tab_name p {
-    margin-left: 12px;
-  }
-
-  .tabs .tab_name::after {
+  .statis .box h3:after {
     content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 12%;
     height: 2px;
-    background-color: #808080;
+    width: 70%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.12);
+    display: block;
+    margin-top: 10px;
   }
 
-  .main_content .table {
-    overflow-x: auto;
+  .statis .box i {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    font-size: 22px;
+    padding: 15px;
+    top: -25px;
+    left: -25px;
+    background-color: rgba(255, 255, 255, 0.15);
+    line-height: 60px;
+    text-align: right;
+    border-radius: 50%;
   }
 
-  .main_content table {
-    border-collapse: collapse;
-    width: 100%;
+
+
+
+
+  .main-color {
+    color: #ffc107
+  }
+
+  /** --------------------------------
+ -- Please don't do that in real-world projects!
+ -- overwrite Bootstrap variables instead.
+-------------------------------- */
+
+  .navbar {
+    background-color: var(--navbar-bg-color) !important;
+    border: none !important;
+  }
+
+  .navbar .dropdown-menu {
+    right: auto !important;
+    left: 0 !important;
+  }
+
+  .navbar .navbar-nav>li>a {
+    color: #EEE !important;
+    line-height: 55px !important;
+    padding: 0 10px !important;
+  }
+
+  .navbar .navbar-brand {
+    color: #FFF !important
+  }
+
+  .navbar .navbar-nav>li>a:focus,
+  .navbar .navbar-nav>li>a:hover {
+    color: #EEE !important
+  }
+
+  .navbar .navbar-nav>.open>a,
+  .navbar .navbar-nav>.open>a:focus,
+  .navbar .navbar-nav>.open>a:hover {
+    background-color: transparent !important;
+    color: #FFF !important
+  }
+
+  .navbar .navbar-brand {
+    line-height: 55px !important;
+    padding: 0 !important
+  }
+
+  .navbar .navbar-brand:focus,
+  .navbar .navbar-brand:hover {
+    color: #FFF !important
+  }
+
+  .navbar>.container .navbar-brand,
+  .navbar>.container-fluid .navbar-brand {
+    margin: 0 !important
+  }
+
+  @media (max-width: 767px) {
+    .navbar>.container-fluid .navbar-brand {
+      margin-left: 15px !important;
+    }
+
+    .navbar .navbar-nav>li>a {
+      padding-left: 0 !important;
+    }
+
+    .navbar-nav {
+      margin: 0 !important;
+    }
+
+    .navbar .navbar-collapse,
+    .navbar .navbar-form {
+      border: none !important;
+    }
+  }
+
+  .navbar .navbar-nav>li>a {
+    float: left !important;
+  }
+
+  .navbar .navbar-nav>li>a>span:not(.caret) {
+    background-color: #e74c3c !important;
+    border-radius: 50% !important;
+    height: 25px !important;
+
+    width: 25px !important;
+    padding: 2px !important;
+    font-size: 11px !important;
+    position: relative !important;
+    top: -10px !important;
+    right: 5px !important
+  }
+
+  .dropdown-menu>li>a {
+    padding-top: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .navbar .navbar-nav>li>a>i {
+    font-size: 18px !important;
+  }
+
+
+
+
+  /* Start media query */
+
+  @media (max-width: 767px) {
+    #wrapper {
+      margin: 0 !important
+    }
+
+    .statistics .box {
+      margin-bottom: 25px !important;
+    }
+
+    .navbar .navbar-nav .open .dropdown-menu>li>a {
+      color: #CCC !important
+    }
+
+    .navbar .navbar-nav .open .dropdown-menu>li>a:hover {
+      color: #FFF !important
+    }
+
+    .navbar .navbar-toggle {
+      border: none !important;
+      color: #EEE !important;
+      font-size: 18px !important;
+    }
+
+    .navbar .navbar-toggle:focus,
+    .navbar .navbar-toggle:hover {
+      background-color: transparent !important
+    }
+  }
+
+
+  ::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #3c3f58;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
   .table td,
   .table th {
-    padding: 25px 20px;
+    padding: 25px 49px;
     text-align: left;
     font-size: 14px;
     cursor: pointer;
@@ -241,849 +445,237 @@
     background: #5bb9c0;
     color: #fff;
   }
-
-  .table img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  .table .profile_name {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
+  @media (max-width: 600px) {
 
 
-  /*----- Right SideBar -----*/
+tbody {
+    text-align: left;
+}
 
-  .right_sidebar {
-    flex-basis: 20%;
-    position: sticky;
-    top: 0px;
-    align-self: flex-start;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .notification_and_name {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 20px;
-    padding-bottom: 35px;
-    border-bottom: 2px solid var(--border-color);
-    cursor: pointer;
-    position: relative;
-  }
-
-  .notification_and_name .close_btn {
-    position: absolute;
-    right: 30px;
-    font-size: 26px;
-    display: none;
-  }
-
-  .notification_and_name img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-position: center;
-    object-fit: cover;
-    margin-right: -20px;
-  }
-
-  .notification_and_name .bell {
-    position: relative;
-    font-size: 20px;
-  }
-
-  .notification_and_name span {
-    position: absolute;
-    background: #ff0000;
-    height: 5px;
-    width: 5px;
-    right: 0px;
-    top: 2px;
-    border-radius: 50%;
-  }
-
-  .profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    gap: 15px;
-  }
-
-  .profile img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-position: center;
-  }
-
-  .profile .name_and_class {
-    text-align: center;
-  }
-
-  .profile .name_and_class P {
-    font-weight: 600;
-  }
-
-  .profile .name_and_class span {
-    font-size: 14px;
-    color: var(--grey-color);
-  }
-
-  .profile .contact_info {
-    display: flex;
-    gap: 30px;
-    font-size: 22px;
-    cursor: pointer;
-  }
-
-  .profile .about {
-    margin: 15px 0;
-  }
-
-  .profile .about h4,
-  .profile .other_info h4 {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .profile .about p,
-  .profile .other_info p {
+.option-select {
     font-size: 12px;
-    margin-top: 10px;
-    color: var(--grey-color);
-  }
+}
 
-  .profile .other_info {
+.td {
+    padding-right: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-
-  .profile .other_info div {
-    width: 120px;
-  }
-
-  .profile .student_from_same_class {
-    width: 300px;
-  }
-
-  .profile .student_from_same_class img {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    background-position: center;
-    margin-left: -8px;
-  }
-
-  .profile .student_from_same_class img:nth-child(1) {
-    margin-left: 0 !important;
-  }
-
-  .profile .student_from_same_class h4 {
-    font-weight: 600;
-    font-size: 14px;
-    margin: 10px 0;
-  }
-
-  .profile .student_same_class_img {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .profile .student_same_class_img span {
-    color: #5bb9c0;
-    font-size: 14px;
-    margin-left: 12px;
-  }
-
-
-  /*----- Media Query -----*/
-
-  @media (max-width: 500px) {
-
-    /*----- left_sidebar -----*/
-    .left_sidebar {
-      transform: translateX(-150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #fff;
-      width: 330px;
-      height: 100%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .left_sidebar .close_hamburger_btn {
-      display: block;
-    }
-
-    .left_sidebar .logo h2 {
-      margin-top: 100px;
-      margin-bottom: 20px;
-      color: #000;
-    }
-
-    .left_sidebar .menu_items .menu_item {
-      font-size: 16px;
-    }
-
-    /*----- right_sidebar -----*/
-    .right_sidebar {
-      transform: translateX(150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      right: 0;
-      background-color: #fff;
-      width: 100%;
-      height: 100%;
-      overflow: scroll;
-    }
-
-    .right_sidebar .profile {
-      gap: 25px;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .profile .other_info {
-      justify-content: center;
-    }
-
-    .profile .name_and_class P,
-    .profile .about h4,
-    .profile .other_info h4 {
-      font-size: 15px;
-      color: #000;
-    }
-
-    .profile .name_and_class span {
-      font-size: 15px;
-    }
-
-    .notification_and_name {
-      color: #000;
-    }
-
-    .notification_and_name .bx-chevron-down {
-      display: none;
-    }
-
-    .notification_and_name .close_btn,
-    .notification_and_name .bell {
-      font-size: 28px;
-    }
-
-    .profile .contact_info {
-      font-size: 24px;
-      gap: 20px;
-      color: #000;
-    }
-
-    .profile .about p,
-    .profile .other_info p,
-    .profile .student_from_same_class h4 {
-      font-size: 14px;
-    }
-
-    .notification_and_name img {
-      height: 50px;
-      width: 50px;
-    }
-
-    .notification_and_name {
-      justify-content: center;
-      gap: 35px;
-    }
-
-    .student_from_same_class {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .notification_and_name .close_btn {
-      display: block;
-    }
-
-    /*----- Main Content -----*/
-    .main_content {
-      flex-basis: 100%;
-      width: 100%;
-    }
-
-    .main_content .left_right_sidebar_opener {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .main_content .left_right_sidebar_opener .hamburger {
-      text-align: left;
-      display: inline;
-    }
-
-    .main_content .left_right_sidebar_opener .user {
-      text-align: right;
-      display: inline;
-    }
-
-    .table td,
-    .table th {
-      font-size: 15px;
-    }
-
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
-
-  @media (min-width: 501px) and (max-width: 768px) {
-
-    /*----- left_sidebar -----*/
-    .left_sidebar {
-      transform: translateX(-150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #fff;
-      width: 330px;
-      height: 100%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .left_sidebar .close_hamburger_btn {
-      display: block;
-    }
-
-    .left_sidebar .logo h2 {
-      margin-top: 100px;
-      margin-bottom: 20px;
-      color: #000;
-    }
-
-    .left_sidebar .menu_items .menu_item {
-      font-size: 16px;
-    }
-
-    /*----- right_sidebar -----*/
-    .right_sidebar {
-      transform: translateX(150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      right: 0;
-      background-color: #fff;
-      width: 100%;
-      height: 100%;
-      overflow: scroll;
-    }
-
-    .right_sidebar .profile {
-      gap: 25px;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .profile .other_info {
-      justify-content: center;
-    }
-
-    .profile .name_and_class P,
-    .profile .about h4,
-    .profile .other_info h4 {
-      font-size: 15px;
-      color: #000;
-    }
-
-    .profile .name_and_class span {
-      font-size: 15px;
-    }
-
-    .notification_and_name {
-      color: #000;
-    }
-
-    .notification_and_name .bx-chevron-down {
-      display: none;
-    }
-
-    .notification_and_name .close_btn,
-    .notification_and_name .bell {
-      font-size: 28px;
-    }
-
-    .profile .contact_info {
-      font-size: 24px;
-      gap: 20px;
-      color: #000;
-    }
-
-    .profile .about p,
-    .profile .other_info p,
-    .profile .student_from_same_class h4 {
-      font-size: 14px;
-    }
-
-    .notification_and_name img {
-      height: 50px;
-      width: 50px;
-    }
-
-    .notification_and_name {
-      justify-content: center;
-      gap: 35px;
-    }
-
-    .student_from_same_class {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .notification_and_name .close_btn {
-      display: block;
-    }
-
-    /*----- Main Content -----*/
-    .main_content {
-      flex-basis: 100%;
-      width: 100%;
-    }
-
-    .main_content .left_right_sidebar_opener {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .main_content .left_right_sidebar_opener .hamburger {
-      text-align: left;
-      display: inline;
-    }
-
-    .main_content .left_right_sidebar_opener .user {
-      text-align: right;
-      display: inline;
-    }
-
-    .table td,
-    .table th {
-      font-size: 15px;
-    }
-
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
-
-  @media(min-width: 769px) and (max-width: 1200px) {
-
-    /*----- left_sidebar -----*/
-    .left_sidebar {
-      transform: translateX(-150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #fff;
-      width: 330px;
-      height: 100%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .left_sidebar .close_hamburger_btn {
-      display: block;
-    }
-
-    .left_sidebar .logo h2 {
-      margin-top: 100px;
-      margin-bottom: 20px;
-      color: #000;
-    }
-
-    .left_sidebar .menu_items .menu_item {
-      font-size: 16px;
-    }
-
-    /*----- right_sidebar -----*/
-    .right_sidebar {
-      transform: translateX(150%);
-      overflow: hidden;
-      z-index: 100;
-      position: fixed;
-      top: 0;
-      right: 0;
-      background-color: #fff;
-      width: 100%;
-      height: 100%;
-      overflow: scroll;
-    }
-
-    .right_sidebar .profile {
-      gap: 25px;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .profile .other_info {
-      justify-content: center;
-    }
-
-    .profile .name_and_class P,
-    .profile .about h4,
-    .profile .other_info h4 {
-      font-size: 15px;
-      color: #000;
-    }
-
-    .profile .name_and_class span {
-      font-size: 15px;
-    }
-
-    .notification_and_name {
-      color: #000;
-    }
-
-    .notification_and_name .bx-chevron-down {
-      display: none;
-    }
-
-    .notification_and_name .close_btn,
-    .notification_and_name .bell {
-      font-size: 28px;
-    }
-
-    .profile .contact_info {
-      font-size: 24px;
-      gap: 20px;
-      color: #000;
-    }
-
-    .profile .about p,
-    .profile .other_info p,
-    .profile .student_from_same_class h4 {
-      font-size: 14px;
-    }
-
-    .notification_and_name img {
-      height: 50px;
-      width: 50px;
-    }
-
-    .notification_and_name {
-      justify-content: center;
-      gap: 35px;
-    }
-
-    .student_from_same_class {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .notification_and_name .close_btn {
-      display: block;
-    }
-
-    /*----- Main Content -----*/
-    .main_content {
-      flex-basis: 100%;
-      width: 100%;
-    }
-
-    .main_content .left_right_sidebar_opener {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .main_content .left_right_sidebar_opener .hamburger {
-      text-align: left;
-      display: inline;
-    }
-
-    .main_content .left_right_sidebar_opener .user {
-      text-align: right;
-      display: inline;
-    }
-
-    .table td,
-    .table th {
-      font-size: 15px;
-    }
-
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
+    justify-content: left;
+}
+
+.responsive-3 {
+    width: 100%;
+}
+
+th {
+    display: none;
+}
+
+td {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 15ch auto;
+    padding: 0.75em 1rem;
+}
+
+td:first-child {
+    padding-top: 2rem;
+}
+
+td::before {
+    content: attr(data-cell) "  : ";
+    font-weight: bold;
+}
+}
 </style>
 
 <body>
-  <div class="container ">
-    <div class="left_sidebar">
-      <div class="close_hamburger_btn">
-        <i class='bx bx-x-circle'></i>
-      </div>
-      <div class="logo ">
-        <h2 onclick="myFunction()">School</h2>
-      </div>
-      <div class="menu_items ">
-        <div class="menu_item ">
-          <i class='bx bxs-dashboard'></i>
-          <p>Dashboard</p>
-        </div>
-        <div class="menu_item ">
-          <i class='bx bx-message-rounded-dots'></i>
-          <p>Messenger</p>
-          <i class="fa-regular fa-circle-2 "></i>
-        </div>
-        <div class="menu_item ">
-          <i class='bx bx-calendar'></i>
-          <p>Calender</p>
-        </div>
-        <div class="menu_item ">
-          <i class='bx bx-file-blank'></i>
-          <p>Database</p>
-        </div>
-        <div class="menu_item ">
-          <i class='bx bx-signal-4'></i>
-          <p>Attendance</p>
-        </div>
-        <div class="menu_item ">
-          <i class='bx bx-cog'></i>
-          <p>Settings</p>
+  <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
+    <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+    <?php foreach ($user as $data_akun) : ?>
+      <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
+        <img class="rounded-pill img-fluid" width="65" src="https://uniim1.shutterfly.com/ng/services/mediarender/THISLIFE/021036514417/media/23148907008/medium/1501685726/enhance" alt="">
+        <div class="ms-2">
+          <h5 class="fs-6 mb-0">
+            <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>
+          </h5>
+          <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit amet consectetur.</p> -->
         </div>
       </div>
-    </div>
-    <div class="main_content">
-      <div class="left_right_sidebar_opener">
-        <div class="hamburger">
-          <i class='bx bx-menu'></i>
+      <ul class="categories list-unstyled">
+        <li>
+          <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
+        </li>
+        <li>
+        <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+        </li>
+      </ul>
+  </aside>
+
+  <section id="wrapper">
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid mx-2">
+        <div class="navbar-header">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <a class="navbar-brand" href="#">admin<span class="main-color">kit</span></a>
         </div>
-        <div class="student">
-          <div class="profile_img">
-            <img src="https://i.postimg.cc/Sxb6gssQ/img-1.jpg" alt="profile img">
+        <div class="collapse navbar-collapse" id="toggle-navbar">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Settings
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="karyawan/profil">My account</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="<?php echo base_url('auth/logout'); ?>">Log out</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <!-- <i class="fa-solid fa-bars"></i> -->
+                <i data-show="show-side-navigation1" class="fa-solid fa-bars show-side-btn"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="p-4">
+      <div class="welcome">
+        <div class="content rounded-3 p-3">
+          <h1 class="fs-3">Welcome to Dashboard</h1>
+          <p class="mb-0">Hello <?php echo $data_akun->username ?>, welcome to your awesome dashboard!</p>
+        </div>
+      </div>
+    <?php endforeach; ?>
+
+    <section class="statistics mt-4">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+            <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
+            <div class="ms-3">
+              <div class="d-flex align-items-center">
+                <h3 class="mb-0">1,245</h3> <span class="d-block ms-2">Total Masuk Kerja</span>
+              </div>
+              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+            </div>
           </div>
-          <div class="profile_name">
-            <p>Kery Roy</p>
+        </div>
+        <div class="col-lg-4">
+          <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+            <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
+            <div class="ms-3">
+              <div class="d-flex align-items-center">
+                <h3 class="mb-0">34</h3> <span class="d-block ms-2">Total Cuti</span>
+              </div>
+              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="box d-flex rounded-2 align-items-center p-3">
+            <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
+            <div class="ms-3">
+              <div class="d-flex align-items-center">
+                <h3 class="mb-0">5,245</h3> <span class="d-block ms-2">Total Users</span>
+              </div>
+              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="main_navbar">
-        <!-- <div class="search_box">
-          <i class='bx bx-search-alt-2'></i> <input type="text " placeholder="Search">
-        </div>
-        <div class="dark_mode_icon" onclick="darkMode()">
-          <i class='bx bx-moon'></i>
-          <i class='bx bx-sun'></i>
-        </div> -->
-      </div>
-      <div class="menu_item_name_and_filter ">
-        <div class="menu_item_name">
-          <h2>Database</h2>
-        </div>
-        <div class="filter_and_sort">
-          <div class="sort sort_and_filter">
-            <p>Sort</p>
-            <i class='bx bx-sort-down'></i>
-          </div>
-          <div class="filter sort_and_filter">
-            <p>Filter</p>
-            <i class='bx bx-filter'></i>
-          </div>
-        </div>
-      </div>
-      <div class="tabs">
-        <div class="tab_name">
-          <p>Student</p>
-          <p>Teacher</p>
-          <p>Staff</p>
-        </div>
-        <div class="three_dots">
-          <i class='bx bx-dots-vertical-rounded'></i>
-        </div>
-      </div>
+    </section>
+
+    <section class="charts mt-4">
+      <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+      <br>
       <div class="table">
         <table>
           <tr>
             <th>No</th>
-            <th>Nama Karyawan</th>
-            <th>Kegiatan</th>
-            <th>Date</th>
-            <th>Jam Masuk</th>
-            <th>Jam Pulang</th>
-            <th>Keterangan Izin</th>
-            <th>Status</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Nama Depan</th>
+            <th>Nama Belakang</th>
+            <th>Image</th>
           </tr>
           <?php $no = 0;
           foreach ($karyawan as $row) : $no++ ?>
             <tr>
-              <td data-th="No">
+              <td data-cell="No">
                 <?php echo $no ?>
               </td>
-              <td data-th="Nama Karyawan">
-                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+              <td data-cell="Email">
+                <?php echo $row->email?>
               </td>
-              <td data-th="Kegiatan">
-                <?php echo $row->kegiatan; ?>
+              <td data-cell="Username">
+                <?php echo $row->username; ?>
               </td>
-              <td data-th="Date">
-                <?php echo $row->date; ?>
+              <td data-cell="Nama Depan">
+                <?php echo $row->nama_depan; ?>
               </td>
-              <td data-th="Jam masuk">
-                <?php echo $row->jam_masuk; ?>
+              <td data-cell="Nama Belakang">
+                <?php echo $row->nama_belakang; ?>
               </td>
-              <td data-th="Jam Pulang">
-                <?php echo $row->jam_pulang; ?>
-              </td>
-              <td data-th="Keterangan izin">
-                <?php echo $row->keterangan_izin; ?>
-              </td>
-              <td data-th="Status">
-                <?php echo $row->status; ?>
+              <td data-cell="Image">
+                <?php echo $row->image; ?>
               </td>
             </tr>
           <?php endforeach; ?>
-          
         </table>
       </div>
-    </div>
-    <div class="right_sidebar ">
-      <div class="notification_and_name ">
-        <div class="close_btn ">
-          <i class='bx bx-x-circle'></i>
-        </div>
-        <div class="bell ">
-          <i class='bx bx-bell'></i>
-          <span></span>
-        </div>
-        <img src="https://i.postimg.cc/Sxb6gssQ/img-1.jpg " alt="profile ">
-        <p>Kery Roy</p>
-        <i class='bx bx-chevron-down'></i>
-      </div>
-      <div class="profile ">
-        <div class="img ">
-          <img src="https://i.postimg.cc/g2M32zcz/image.png " alt="studentImg ">
-        </div>
-        <div class="name_and_class ">
-          <p>Hermione Granger</p>
-          <span>BCA Student</span>
-        </div>
-        <div class="contact_info ">
-          <i class='bx bx-message-rounded-dots'></i>
-          <i class='bx bx-phone-call'></i>
-          <i class='bx bx-envelope'></i>
-        </div>
-        <div class="about ">
-          <h4>About</h4>
-          <p>BCA student studied at ABC School of Commerce and Computer studies. I really enjoy solving problems as well as making things pretty and easy to use. I can't stop learning new things; the more, the better.</p>
-        </div>
-        <div class="other_info ">
-          <div class="age ">
-            <h4>Age</h4>
-            <p>18</p>
-          </div>
-          <div class="gender ">
-            <h4>Gender</h4>
-            <p>Female</p>
-          </div>
-          <div class="dob ">
-            <h4>DOB</h4>
-            <p>12/11/2006</p>
-          </div>
-          <div class="address ">
-            <h4>Address</h4>
-            <p>USA</p>
-          </div>
-        </div>
-        <div class="student_from_same_class ">
-          <div class="student_same_class_heading ">
-            <h4>Student from the same class</h4>
-          </div>
-          <div class="student_same_class_img ">
-            <img src="https://i.postimg.cc/qBbpBPZB/img-2.jpg " alt="img ">
-            <img src="https://i.postimg.cc/BvPJ7FHN/img1.jpg " alt="img ">
-            <img src="https://i.postimg.cc/SRkqKt5t/img2.jpg " alt="img ">
-            <img src="https://i.postimg.cc/xCR77pg2/dahiana-waszaj-XQWfro4LrVs-unsplash.jpg " alt="img ">
-            <img src="https://i.postimg.cc/9MXPK7RT/news2.jpg " alt="img ">
-            <span>+12 More</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
+    <script>
+      function $(selector) {
+        return document.querySelector(selector)
+      }
+
+      function find(el, selector) {
+        let finded
+        return (finded = el.querySelector(selector)) ? finded : null
+      }
+
+      function siblings(el) {
+        const siblings = []
+        for (let sibling of el.parentNode.children) {
+          if (sibling !== el) {
+            siblings.push(sibling)
+          }
+        }
+        return siblings
+      }
+
+      const showAsideBtn = $('.show-side-btn')
+      const sidebar = $('.sidebar')
+      const wrapper = $('#wrapper')
+
+      showAsideBtn.addEventListener('click', function() {
+        $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+        wrapper.classList.toggle('fullwidth')
+      })
+
+      if (window.innerWidth < 767) {
+        sidebar.classList.add('show-sidebar');
+      }
+
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 767) {
+          sidebar.classList.remove('show-sidebar')
+        }
+      })
+      $('.sidebar .close-aside').addEventListener('click', function() {
+        $(`#${this.dataset.close}`).classList.add('show-sidebar')
+        wrapper.classList.remove('margin')
+      })
+    </script>
 </body>
-<script>
-  $(document).ready(function() {
-    $('.hamburger').click(function() {
-      $('.left_sidebar').css({
-        'transform': 'translateX(0)'
-      });
-    });
-    $('.student').click(function() {
-      $('.right_sidebar').css({
-        'transform': 'translateX(0)'
-      });
-    });
-
-    $('.close_btn').click(function() {
-      $('.right_sidebar').css({
-        'transform': 'translateX(150%)'
-      })
-    })
-
-    $('.close_hamburger_btn').click(function() {
-      $('.left_sidebar').css({
-        'transform': 'translateX(-150%)'
-      })
-    })
-
-  });
-
-  function darkMode() {
-    $('body').toggleClass('dark-mode');
-    $('.table tr:nth-child(even)').css({
-      'color': '#000',
-    })
-    $('.table tr:nth-child(4)').css({
-      'background-color': '#5bb9c0',
-      'color': '#fff',
-    })
-
-    $('.main_content .main_navbar .dark_mode_icon .bx-sun').click(function() {
-      $(this).css('display', 'none');
-      $('.main_content .main_navbar .dark_mode_icon .bx-moon').css('display', 'block');
-    });
-
-    $('.main_content .main_navbar .dark_mode_icon .bx-moon').click(function() {
-      $(this).css('display', 'none');
-      $('.main_content .main_navbar .dark_mode_icon .bx-sun').css('display', 'block');
-    });
-  }
-</script>
 
 </html>

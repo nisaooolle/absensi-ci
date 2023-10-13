@@ -47,6 +47,16 @@ class Auth extends CI_Controller {
     if ($this->session->userdata('role') == 'admin') {
       redirect(base_url()."admin/dasboard");
     }elseif ($this->session->userdata('role') == 'karyawan') {
+      $data = [
+        'id_karyawan' => $result['id'],
+        'date' => date('Y-m-d'),
+        'jam_masuk' => date('H:i:s'),
+        'kegiatan' => '-',
+        'jam_pulang' => '00:00:00',
+        'keterangan_izin' => '-',
+        'status' => 'not',
+      ];
+      $this->m_model->tambah_data('absensi', $data);
       redirect(base_url()."karyawan");
     } else {
       redirect(base_url()."auth");

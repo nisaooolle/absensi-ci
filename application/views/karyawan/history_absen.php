@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
     @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
@@ -431,7 +432,7 @@
 
     .table td,
     .table th {
-        padding: 25px 20px;
+        padding: 20px 20px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -474,47 +475,48 @@
     label {
         font-size: 25px;
     }
+
     @media (max-width: 600px) {
 
 
-tbody {
-    text-align: left;
-}
+        tbody {
+            text-align: left;
+        }
 
-.option-select {
-    font-size: 12px;
-}
+        .option-select {
+            font-size: 12px;
+        }
 
-.td {
-    padding-right: none;
-    display: flex;
-    justify-content: left;
-}
+        .td {
+            padding-right: none;
+            display: flex;
+            justify-content: left;
+        }
 
-.responsive-3 {
-    width: 100%;
-}
+        .responsive-3 {
+            width: 100%;
+        }
 
-th {
-    display: none;
-}
+        th {
+            display: none;
+        }
 
-td {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: 15ch auto;
-    padding: 0.75em 1rem;
-}
+        td {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 15ch auto;
+            padding: 0.75em 1rem;
+        }
 
-td:first-child {
-    padding-top: 2rem;
-}
+        td:first-child {
+            padding-top: 2rem;
+        }
 
-td::before {
-    content: attr(data-cell) "  : ";
-    font-weight: bold;
-}
-}
+        td::before {
+            content: attr(data-cell) "  : ";
+            font-weight: bold;
+        }
+    }
 </style>
 
 <body>
@@ -530,6 +532,7 @@ td::before {
                 </div>
             </div>
         <?php endforeach; ?>
+
         <ul class="categories list-unstyled">
             <li>
                 <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/karyawan">Dashboard</a>
@@ -581,165 +584,144 @@ td::before {
                 </div>
             </div>
         </nav>
+        <section class="charts mt-4">
+            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Karyawan</th>
+                        <th>Kegiatan</th>
+                        <th>Date</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Pulang</th>
+                        <th>Keterangan Izin</th>
+                        <th>Status</th>
+                        <th xclass="text-center">Action</th>
+                    </tr>
+                    <?php $no = 0;
+                    foreach ($karyawan as $row) : $no++ ?>
+                        <tr>
+                            <td data-th="No">
+                                <?php echo $no ?>
+                            </td>
+                            <td data-th="Nama Karyawan">
+                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                            </td>
+                            <td data-th="Kegiatan">
+                                <?php echo $row->kegiatan; ?>
+                            </td>
+                            <td data-th="Date">
+                                <?php echo $row->date; ?>
+                            </td>
+                            <td data-th="Jam masuk">
+                                <?php echo $row->jam_masuk; ?>
+                            </td>
+                            <td data-th="Jam Pulang">
+                                <?php echo $row->jam_pulang; ?>
+                            </td>
+                            <td data-th="Keterangan izin">
+                                <?php echo $row->keterangan_izin; ?>
+                            </td>
+                            <td data-th="Status">
+                                <?php echo $row->status; ?>
+                            </td>
+                            <!-- <td data-cell="Aksi" class="text-center aksi">
+                                <a href="<?php echo base_url('karyawan/menu_absensi/') . $row->id ?>" type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button>
+                                <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm hapus"><i class="fa-solid fa-check"></i></button>
+                            </td> -->
 
-        <div class="texta">
-            <?php foreach ($absen as $karyawan) : ?>
-                <form action="<?php echo base_url('karyawan/aksi_update_absensi') ?>" method="post">
-                    <label for="" style="color:#6E7C7C;font-weight: bold;">Absen Kegiatan</label>
-                    <input type="hidden" name="id" value="<?php echo $karyawan->id ?>">
-                    <br>
-                    <textarea name="kegiatan" id="" cols="100" rows="10"><?php echo $karyawan->kegiatan ?></textarea>
-                </form>
-        </div>
-        <div class="flex px-3">
-            <button type="button" class="btn btn-sm btn-danger text-danger-hover-none"><a class="text-light text-decoration-none" href="/absensi-codeigniter3/karyawan/history_absen">
-                    Cancel</a>
-            </button>
-            <?php if ($karyawan->status == "done") : ?>
-                <button type="button" class="btn btn-sm btn-success text-danger-hover-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Izin
-                </button>
-            <?php elseif ($karyawan->keterangan_izin != "-") : ?>
-                <button type="button" onclick="tampilSweetAlertKeterangan()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php else : ?>
-                <button type="button" onclick="tampilSweetAlert()" class="btn btn-sm btn-success text-danger-hover-none">
-                    Izin
-                </button>
-            <?php endif; ?>
-            <button type="submit" name="submit" class="btn btn-sm btn-primary text-danger-hover-none">
-                Submit
-            </button>
-        </div>
-        </form>
-    <?php endforeach ?>
-    </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="modal-content" method="post" action="<?php echo base_url('karyawan/aksi_keterangan_izin') ?>" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <?php foreach ($karyawan1 as $keterangan) : ?>
-                    <input type="hidden" name="id" value="<?php echo $keterangan->id ?>">
-                    <div class="modal-body">
-                        <label for="" class="form-label">Keterangan izin</label>
-                        <textarea cols="40" rows="10" name="keterangan_izin" class="form-control"><?php echo $keterangan->keterangan_izin ?></textarea>
-                    </div>
-                <?php endforeach; ?>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                    <!-- <button type="submit" name="submit" class="btn btn-primary">Save changes</button> -->
-                </div>
-            </form>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <?php if ($this->session->flashdata('gagal_ijin')) : ?>
+                            <td class="text-end">
+                                <?php if ($row->status == "done") : ?>
+                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none">
+                                            Pulang</a>
+                                    </button>
+                                <?php elseif ($row->keterangan_izin != "-") : ?>
+                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none">
+                                            Pulang</a>
+                                    </button>
+                                <?php else : ?>
+                                    <button type="button" class="btn btn-sm btn-warning text-danger-hover"><a class="text-black text-decoration-none" href="<?php echo base_url('Karyawan/pulang/' . $row->id) ?>">
+                                            Pulang</a>
+                                    </button>
+                                <?php endif; ?>
+                                <a href="<?php echo base_url('karyawan/menu_absensi/') . $row->id ?>" type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </section>
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal izin',
-                text: '<?= $this->session->flashdata('gagal_ijin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata('gagal_izin')) : ?>
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: '<?= $this->session->flashdata('gagal_izin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        </script>
-    <?php endif; ?>
-    <script>
-        function tampilSweetAlert() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Tidak bisa izin karena anda belum pulang',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function tampilSweetAlertKeterangan() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: 'Anda sudah izin hari ini',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
-            });
-        }
-    </script>
-    <script>
-        function $(selector) {
-            return document.querySelector(selector)
-        }
+            function hapus(id) {
+                swal.fire({
+                    title: 'Yakin untuk menghapus data ini?',
+                    text: "Data ini akan terhapus permanen",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Ya Hapus'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500,
 
-        function find(el, selector) {
-            let finded
-            return (finded = el.querySelector(selector)) ? finded : null
-        }
-
-        function siblings(el) {
-            const siblings = []
-            for (let sibling of el.parentNode.children) {
-                if (sibling !== el) {
-                    siblings.push(sibling)
-                }
+                        }).then(function() {
+                            window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/') ?>" + id;
+                        });
+                    }
+                });
             }
-            return siblings
-        }
 
-        const showAsideBtn = $('.show-side-btn')
-        const sidebar = $('.sidebar')
-        const wrapper = $('#wrapper')
-
-        showAsideBtn.addEventListener('click', function() {
-            $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
-            wrapper.classList.toggle('fullwidth')
-        })
-
-        if (window.innerWidth < 767) {
-            sidebar.classList.add('show-sidebar');
-        }
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 767) {
-                sidebar.classList.remove('show-sidebar')
+            function $(selector) {
+                return document.querySelector(selector)
             }
-        })
-        $('.sidebar .close-aside').addEventListener('click', function() {
-            $(`#${this.dataset.close}`).classList.add('show-sidebar')
-            wrapper.classList.remove('margin')
-        })
-    </script>
 
+            function find(el, selector) {
+                let finded
+                return (finded = el.querySelector(selector)) ? finded : null
+            }
+
+            function siblings(el) {
+                const siblings = []
+                for (let sibling of el.parentNode.children) {
+                    if (sibling !== el) {
+                        siblings.push(sibling)
+                    }
+                }
+                return siblings
+            }
+
+            const showAsideBtn = $('.show-side-btn')
+            const sidebar = $('.sidebar')
+            const wrapper = $('#wrapper')
+
+            showAsideBtn.addEventListener('click', function() {
+                $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+                wrapper.classList.toggle('fullwidth')
+            })
+
+            if (window.innerWidth < 767) {
+                sidebar.classList.add('show-sidebar');
+            }
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 767) {
+                    sidebar.classList.remove('show-sidebar')
+                }
+            })
+            $('.sidebar .close-aside').addEventListener('click', function() {
+                $(`#${this.dataset.close}`).classList.add('show-sidebar')
+                wrapper.classList.remove('margin')
+            })
+        </script>
 </body>
 
 </html>
