@@ -474,47 +474,48 @@
     label {
         font-size: 25px;
     }
+
     @media (max-width: 600px) {
 
 
-tbody {
-    text-align: left;
-}
+        tbody {
+            text-align: left;
+        }
 
-.option-select {
-    font-size: 12px;
-}
+        .option-select {
+            font-size: 12px;
+        }
 
-.td {
-    padding-right: none;
-    display: flex;
-    justify-content: left;
-}
+        .td {
+            padding-right: none;
+            display: flex;
+            justify-content: left;
+        }
 
-.responsive-3 {
-    width: 100%;
-}
+        .responsive-3 {
+            width: 100%;
+        }
 
-th {
-    display: none;
-}
+        th {
+            display: none;
+        }
 
-td {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: 15ch auto;
-    padding: 0.75em 1rem;
-}
+        td {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: 15ch auto;
+            padding: 0.75em 1rem;
+        }
 
-td:first-child {
-    padding-top: 2rem;
-}
+        td:first-child {
+            padding-top: 2rem;
+        }
 
-td::before {
-    content: attr(data-cell) "  : ";
-    font-weight: bold;
-}
-}
+        td::before {
+            content: attr(data-cell) "  : ";
+            font-weight: bold;
+        }
+    }
 </style>
 
 <body>
@@ -537,12 +538,12 @@ td::before {
             <li class="">
                 <i class="fa-solid fa-clock-rotate-left"></i><a href="history_absen">History Absen</a>
             </li>
-            <li>
+            <!-- <li>
                 <i class="fa-solid fa-bars"></i><a href="menu_absensi"> Menu Absensi</a>
             </li>
             <li>
                 <i class="fa-solid fa-bars"></i><a href="menu_izin">Menu Izin</a>
-            </li>
+            </li> -->
         </ul>
     </aside>
 
@@ -563,7 +564,7 @@ td::before {
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="profil">My account</a>
+                                    <a class="dropdown-item" href="profile">My account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -589,14 +590,13 @@ td::before {
                     <input type="hidden" name="id" value="<?php echo $karyawan->id ?>">
                     <br>
                     <textarea name="kegiatan" id="" cols="100" rows="10"><?php echo $karyawan->kegiatan ?></textarea>
-                </form>
         </div>
         <div class="flex px-3">
             <button type="button" class="btn btn-sm btn-danger text-danger-hover-none"><a class="text-light text-decoration-none" href="/absensi-codeigniter3/karyawan/history_absen">
                     Cancel</a>
             </button>
-            <?php if ($karyawan->status == "done") : ?>
-                <button type="button" class="btn btn-sm btn-success text-danger-hover-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <?php if ($karyawan->status != "done") : ?>
+                <button type="button" onclick="tampilSweetAlert()" class="btn btn-sm btn-success text-danger-hover-none">
                     Izin
                 </button>
             <?php elseif ($karyawan->keterangan_izin != "-") : ?>
@@ -604,7 +604,7 @@ td::before {
                     Izin
                 </button>
             <?php else : ?>
-                <button type="button" onclick="tampilSweetAlert()" class="btn btn-sm btn-success text-danger-hover-none">
+                <button type="button" class="btn btn-sm btn-success text-danger-hover-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Izin
                 </button>
             <?php endif; ?>

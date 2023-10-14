@@ -445,47 +445,48 @@
     background: #5bb9c0;
     color: #fff;
   }
+
   @media (max-width: 600px) {
 
 
-tbody {
-    text-align: left;
-}
+    tbody {
+      text-align: left;
+    }
 
-.option-select {
-    font-size: 12px;
-}
+    .option-select {
+      font-size: 12px;
+    }
 
-.td {
-    padding-right: none;
-    display: flex;
-    justify-content: left;
-}
+    .td {
+      padding-right: none;
+      display: flex;
+      justify-content: left;
+    }
 
-.responsive-3 {
-    width: 100%;
-}
+    .responsive-3 {
+      width: 100%;
+    }
 
-th {
-    display: none;
-}
+    th {
+      display: none;
+    }
 
-td {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: 15ch auto;
-    padding: 0.75em 1rem;
-}
+    td {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 15ch auto;
+      padding: 0.75em 1rem;
+    }
 
-td:first-child {
-    padding-top: 2rem;
-}
+    td:first-child {
+      padding-top: 2rem;
+    }
 
-td::before {
-    content: attr(data-cell) "  : ";
-    font-weight: bold;
-}
-}
+    td::before {
+      content: attr(data-cell) "  : ";
+      font-weight: bold;
+    }
+  }
 </style>
 
 <body>
@@ -506,7 +507,13 @@ td::before {
           <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
         </li>
         <li>
-        <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+          <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-signal"></i><a href="rekap_bulanan">Rekapan Bulanan</a>
         </li>
       </ul>
   </aside>
@@ -559,33 +566,11 @@ td::before {
     <section class="statistics mt-4">
       <div class="row">
         <div class="col-lg-4">
-          <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-            <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
-            <div class="ms-3">
-              <div class="d-flex align-items-center">
-                <h3 class="mb-0">1,245</h3> <span class="d-block ms-2">Total Masuk Kerja</span>
-              </div>
-              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-            <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
-            <div class="ms-3">
-              <div class="d-flex align-items-center">
-                <h3 class="mb-0">34</h3> <span class="d-block ms-2">Total Cuti</span>
-              </div>
-              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
           <div class="box d-flex rounded-2 align-items-center p-3">
             <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
             <div class="ms-3">
               <div class="d-flex align-items-center">
-                <h3 class="mb-0">5,245</h3> <span class="d-block ms-2">Total Users</span>
+                <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
               </div>
               <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
             </div>
@@ -603,9 +588,9 @@ td::before {
             <th>No</th>
             <th>Email</th>
             <th>Username</th>
+            <th>Foto</th>
             <th>Nama Depan</th>
             <th>Nama Belakang</th>
-            <th>Image</th>
           </tr>
           <?php $no = 0;
           foreach ($karyawan as $row) : $no++ ?>
@@ -614,19 +599,19 @@ td::before {
                 <?php echo $no ?>
               </td>
               <td data-cell="Email">
-                <?php echo $row->email?>
+                <?php echo $row->email ?>
               </td>
               <td data-cell="Username">
                 <?php echo $row->username; ?>
+              </td>
+              <td data-cell="Foto">
+                <img src="<?php echo base_url('images/karyawan/' . $row->foto) ?>" width="50" alt="">
               </td>
               <td data-cell="Nama Depan">
                 <?php echo $row->nama_depan; ?>
               </td>
               <td data-cell="Nama Belakang">
                 <?php echo $row->nama_belakang; ?>
-              </td>
-              <td data-cell="Image">
-                <?php echo $row->image; ?>
               </td>
             </tr>
           <?php endforeach; ?>

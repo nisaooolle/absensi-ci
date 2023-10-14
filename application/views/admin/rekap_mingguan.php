@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
     @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
@@ -364,6 +362,7 @@
         background-color: #e74c3c !important;
         border-radius: 50% !important;
         height: 25px !important;
+
         width: 25px !important;
         padding: 2px !important;
         font-size: 11px !important;
@@ -432,7 +431,7 @@
 
     .table td,
     .table th {
-        padding: 20px 20px;
+        padding: 25px 49px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -445,35 +444,6 @@
     .table tr:nth-child(4) {
         background: #5bb9c0;
         color: #fff;
-    }
-
-    .texta {
-        margin-left: 30px;
-        margin-top: 30px;
-    }
-
-    .submit {
-        border: none;
-        padding: 15px 70px;
-        border-radius: 8px;
-        display: block;
-        margin: auto;
-        margin-top: 20px;
-        margin-left: 10px;
-        background-color: #6E7C7C;
-        color: #fff;
-        font-weight: bold;
-        -webkit-box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-        -moz-box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-        box-shadow: 0px 9px 15px -11px rgba(88, 54, 114, 1);
-    }
-
-    .submit:hover {
-        background-color: #A6A9B6;
-    }
-
-    label {
-        font-size: 25px;
     }
 
     @media (max-width: 600px) {
@@ -521,7 +491,7 @@
 
 <body>
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
-        <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+        <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
             <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
                 <img class="rounded-pill img-fluid" width="65" src="https://uniim1.shutterfly.com/ng/services/mediarender/THISLIFE/021036514417/media/23148907008/medium/1501685726/enhance" alt="">
@@ -529,18 +499,23 @@
                     <h5 class="fs-6 mb-0">
                         <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>
                     </h5>
+                    <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit amet consectetur.</p> -->
                 </div>
             </div>
-        <?php endforeach; ?>
-
-        <ul class="categories list-unstyled">
-            <li>
-                <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/karyawan">Dashboard</a>
-            </li>
-            <li class="">
-                <i class="fa-solid fa-clock-rotate-left"></i><a href="history_absen">History Absen</a>
-            </li>
-        </ul>
+            <ul class="categories list-unstyled">
+                <li>
+                    <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-signal"></i><a href="rekap_bulanan">Rekapan Bulanan</a>
+                </li>
+            </ul>
     </aside>
 
     <section id="wrapper">
@@ -548,9 +523,9 @@
             <div class="container-fluid mx-2">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="uil-bars text-white"></i>
+                        <i class="fa-solid fa-caret-down"></i>
                     </button>
-                    <a class="navbar-brand" href="#">absen<span class="main-color">si</span></a>
+                    <a class="navbar-brand" href="#">admin<span class="main-color">kit</span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="toggle-navbar">
                     <ul class="navbar-nav ms-auto">
@@ -560,7 +535,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="profile">My account</a>
+                                    <a class="dropdown-item" href="karyawan/profil">My account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -578,96 +553,59 @@
                 </div>
             </div>
         </nav>
+        <?php endforeach; ?>
+
+
         <section class="charts mt-4">
-            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
+            <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+            <br>
             <div class="table">
                 <table>
                     <tr>
-                        <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Kegiatan</th>
-                        <th>Date</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Pulang</th>
-                        <th>Keterangan Izin</th>
-                        <th>Status</th>
-                        <th class="text-center">Action</th>
+                        <th>NO</th>
+                        <th>
+                            KEGIATAN
+                        </th>
+                        <th>TANGGAL</th>
+                        <th>JAM MASUK</th>
+                        <th>JAM PULANG</th>
+                        <th>KETERANGAN IZIN</th>
                     </tr>
                     <?php $no = 0;
-                    foreach ($karyawan as $row) : $no++ ?>
-                        <tr>
-                            <td data-th="No">
-                                <?php echo $no ?>
+                    foreach ($absensi as $absen) : $no++ ?>
+                        <tr class="whitespace-nowrap">
+                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $absen['kegiatan']; ?>
+                                </div>
                             </td>
-                            <td data-th="Nama Karyawan">
-                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $absen['date']; ?>
+                                </div>
                             </td>
-                            <td data-th="Kegiatan">
-                                <?php echo $row->kegiatan; ?>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $absen['jam_masuk']; ?>
+                                </div>
                             </td>
-                            <td data-th="Date">
-                                <?php echo $row->date; ?>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $absen['jam_pulang']; ?>
+                                </div>
                             </td>
-                            <td data-th="Jam masuk">
-                                <?php echo $row->jam_masuk; ?>
-                            </td>
-                            <td data-th="Jam Pulang">
-                                <?php echo $row->jam_pulang; ?>
-                            </td>
-                            <td data-th="Keterangan izin">
-                                <?php echo $row->keterangan_izin; ?>
-                            </td>
-                            <td data-th="Status">
-                                <?php echo $row->status; ?>
-                            </td>
-                            <td class="text-end">
-                                <?php if ($row->status == "done") : ?>
-                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none">
-                                            <i class="fa-solid fa-check"></i></a>
-                                    </button>
-                                <?php elseif ($row->keterangan_izin != "-") : ?>
-                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none"><i class="fa-solid fa-check"></i>
-                                        </a>
-                                    </button>
-                                <?php else : ?>
-                                    <button type="button" class="btn btn-sm btn-warning text-danger-hover"><a class="text-black text-decoration-none" href="<?php echo base_url('Karyawan/pulang/' . $row->id) ?>"><i class="fa-solid fa-check"></i>
-                                        </a>
-                                    </button>
-                                <?php endif; ?>
-                                <a href="<?php echo base_url('karyawan/menu_absensi/') . $row->id ?>" type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm edit"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button>
+                            <td class="px-3 py-4">
+                                <div class="text-sm text-gray-900">
+                                    <?php echo $absen['keterangan_izin']; ?>
+                                </div>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endforeach ?>
                 </table>
             </div>
         </section>
         <script>
-            function hapus(id) {
-                swal.fire({
-                    title: 'Yakin untuk menghapus data ini?',
-                    text: "Data ini akan terhapus permanen",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Batal',
-                    confirmButtonText: 'Ya Hapus'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil Dihapus',
-                            showConfirmButton: false,
-                            timer: 1500,
-
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/') ?>" + id;
-                        });
-                    }
-                });
-            }
-
             function $(selector) {
                 return document.querySelector(selector)
             }

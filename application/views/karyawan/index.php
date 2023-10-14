@@ -508,11 +508,11 @@ td::before {
         <i class="fa-solid fa-clock-rotate-left"></i><a href="karyawan/history_absen">History Absen</a>
       </li>
       <li>
-        <i class="fa-solid fa-bars"></i><a href="karyawan/menu_absensi"> Menu Absensi</a>
+        <!-- <i class="fa-solid fa-bars"></i><a href="karyawan/menu_absensi"> Menu Absensi</a>
       </li>
       <li>
         <i class="fa-solid fa-bars"></i><a href="karyawan/menu_izin">Menu Izin</a>
-      </li>
+      </li> -->
       </ul>
   </aside>
 
@@ -533,7 +533,7 @@ td::before {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="karyawan/profil">My account</a>
+                  <a class="dropdown-item" href="karyawan/profile">My account</a>
                 </li>
                 <li>
                   <hr class="dropdown-divider">
@@ -568,7 +568,7 @@ td::before {
               <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
-                  <h3 class="mb-0">1,245</h3> <span class="d-block ms-2">Total Masuk Kerja</span>
+                  <h3 class="mb-0"><?php echo $total_absen ?></h3> <span class="d-block ms-2">Total Masuk Kerja</span>
                 </div>
                 <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
               </div>
@@ -579,7 +579,7 @@ td::before {
               <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
-                  <h3 class="mb-0">34</h3> <span class="d-block ms-2">Total Cuti</span>
+                  <h3 class="mb-0"><?php echo $total_izin ?></h3> <span class="d-block ms-2">Total Cuti</span>
                 </div>
                 <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
               </div>

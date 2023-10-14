@@ -12,6 +12,7 @@ class Karyawan extends CI_Controller
   {
     parent::__construct();
     $this->load->model('m_model');
+    $this->load->library('upload');
     // fungsi validasi dibawah untuk ngecek ketika masuk ke halaman admin , data sdh true atau blm
     // kalo blm true maka akan kembali ke page auth
     if ($this->session->userdata('logged_in') != true || $this->session->userdata('role') != 'karyawan') {
@@ -24,6 +25,9 @@ class Karyawan extends CI_Controller
     $data_karyawan = $this->m_model->getAbsensiByIdKaryawan($idKaryawan);
     $data['karyawan'] = $data_karyawan;
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+    $data['absen'] = $this->m_model->get_history('absensi', $this->session->userdata('id'))->result();
+    $data['total_absen'] = $this->m_model->get_absen('absensi', $this->session->userdata('id'))->num_rows();
+    $data['total_izin'] = $this->m_model->get_izin('absensi', $this->session->userdata('id'))->num_rows();
     $this->load->view('karyawan/index', $data);
   }
   public function menu_absensi($id)
@@ -53,11 +57,6 @@ class Karyawan extends CI_Controller
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $this->load->view('karyawan/menu_izin', $data);
   }
-  public function profil()
-  {
-    $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
-    $this->load->view('karyawan/profil', $data);
-  }
   public function history_absen()
   {
     $idKaryawan = $this->session->userdata('id');
@@ -66,26 +65,30 @@ class Karyawan extends CI_Controller
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $this->load->view('karyawan/history_absen', $data);
   }
+  public function profile()
+  {
+    $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+    $this->load->view('karyawan/profile', $data);
+  }
 
   public function aksi_akun()
   {
-    $foto = $this->upload_images('image');
+    $foto = $this->upload_images('foto');
     $email = $this->input->post('email');
     $username = $this->input->post('username');
     $password_baru = $this->input->post('password_baru');
     $konfirmasi_password = $this->input->post('konfirmasi_password');
 
-    $foto = $this->upload_images('image');
+    $foto = $this->upload_images('foto');
     if ($foto[0] == false) {
-      $data = [
-        'image' => 'User.png',
+      $data = [   
+        'foto' => 'User.png',
         'email' => $email,
         'username' => $username,
-
       ];
     } else {
       $data = [
-        'image' => $foto[1],
+        'foto' => $foto[1],
         'email' => $email,
         'username' => $username,
       ];
@@ -98,16 +101,16 @@ class Karyawan extends CI_Controller
         $data['password'] = md5($password_baru);
       } else {
         $this->session->set_flashdata('message', 'password baru dan konfirmasi password harus sama...');
-        redirect(base_url('karyawan/profil'));
-      }
+        redirect(base_url('karyawan/profile'));
+      } 
     }
     // lakukan pembaruan data
     $this->session->set_userdata($data);
     $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
     if ($update_result) {
-      redirect(base_url('karyawan/profil'));
+      redirect(base_url('karyawan/profile'));
     } else {
-      redirect(base_url('karyawan/profil'));
+      redirect(base_url('karyawan/profile'));
     }
   }
   public function upload_images($value)
@@ -151,11 +154,6 @@ class Karyawan extends CI_Controller
     $id = $this->input->post('id');
     $user_id = $this->session->userdata('id');
 
-    $ijin_hari_ini = $this->m_model->izin_satu_kali($user_id, $id);
-    if (!empty($ijin_hari_ini)) {
-      $this->session->set_flashdata('gagal_ijin', "Anda sudah ijin hari ini");
-      redirect(base_url('karyawan/menu_absensi/' . $this->input->post('id')));
-    } else {
       $data = [
         'keterangan_izin' => $this->input->post('keterangan_izin'),
         "jam_pulang" => "00:00:00",
@@ -171,7 +169,6 @@ class Karyawan extends CI_Controller
         $this->session->set_flashdata('gagal_izin', "Gagal memberi keterangan izin");
         redirect(base_url('karyawan/menu_absensi/' . $this->input->post('id')));
       }
-    }
   }
 
   public function hapus_karyawan($id)

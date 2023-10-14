@@ -186,6 +186,7 @@
               </div>              <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
               <input type="text" name="nama_belakang" placeholder="NAMA BELAKANG" required="">
               <input type="hidden" name="role" value="admin">
+              <input type="hidden" name="foto" value="user.png">
               <button class="submit">LET'S GO</button>
             </form>
           </div>
