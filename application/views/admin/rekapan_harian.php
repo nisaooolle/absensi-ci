@@ -431,7 +431,7 @@
 
     .table td,
     .table th {
-        padding: 25px 45px;
+        padding: 25px 42px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -558,14 +558,13 @@
         </nav>
     <?php endforeach; ?>
 
-
     <section class="charts mt-4">
-        <a href="<?php echo base_url('admin/export_rekap_mingguan') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+        <a href="<?php echo base_url('admin/export_rekap_harian') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
         <br>
         <div class="table">
             <table>
                 <tr>
-                <th>No</th>
+                    <th>No</th>
                     <th>Nama Karyawan</th>
                     <th>Kegiatan</th>
                     <th>Date</th>
@@ -574,41 +573,31 @@
                     <th>Keterangan Izin</th>
                 </tr>
                 <?php $no = 0;
-                foreach ($absensi as $absen) : $no++ ?>
-                    <tr class="whitespace-nowrap">
-                        <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['nama_depan'] . ' ' . $absen['nama_belakang']; ?>
-                            </div>
+                foreach ($absensi as $row) : $no++ ?>
+                    <tr>
+                        <td data-cell="No">
+                            <?php echo $no ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['kegiatan']; ?>
-                            </div>
+                        <td data-cell="Nama Karyawan">
+                            <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['date']; ?>
-                            </div>
+                        <td data-cell="Kegiatan">
+                            <?php echo $row->kegiatan; ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['jam_masuk']; ?>
-                            </div>
+                        <td data-cell="Date">
+                            <?php echo $row->date; ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['jam_pulang']; ?>
-                            </div>
+                        <td data-cell="Jam masuk">
+                            <?php echo $row->jam_masuk; ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <div class="text-sm text-gray-900">
-                                <?php echo $absen['keterangan_izin']; ?>
-                            </div>
+                        <td data-cell="Jam Pulang">
+                            <?php echo $row->jam_pulang; ?>
+                        </td>
+                        <td data-cell="Keterangan izin">
+                            <?php echo $row->keterangan_izin; ?>
                         </td>
                     </tr>
-                <?php endforeach ?>
+                <?php endforeach; ?>
             </table>
         </div>
     </section>

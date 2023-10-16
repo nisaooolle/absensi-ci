@@ -28,6 +28,7 @@ class Karyawan extends CI_Controller
     $data['absen'] = $this->m_model->get_history('absensi', $this->session->userdata('id'))->result();
     $data['total_absen'] = $this->m_model->get_absen('absensi', $this->session->userdata('id'))->num_rows();
     $data['total_izin'] = $this->m_model->get_izin('absensi', $this->session->userdata('id'))->num_rows();
+    $data['karya'] = $this->m_model->get_data('user')->num_rows();
     $this->load->view('karyawan/index', $data);
   }
   public function menu_absensi($id)
@@ -57,6 +58,48 @@ class Karyawan extends CI_Controller
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $this->load->view('karyawan/menu_izin', $data);
   }
+  public function aksi_izin()
+  {
+    $tanggal = date('Y-m-d');
+    $query_absen = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
+    $validasi_absen = $query_absen->num_rows();
+    $query_izin = $this->m_model->get_izin_by_tanggal($tanggal, $this->session->userdata('id'));
+    $validasi_izin = $query_izin->num_rows();
+    if ($validasi_izin > 0) {
+      $this->session->set_flashdata('error', 'error ');
+      redirect(base_url('karyawan/menu_izin'));
+    } else if ($validasi_absen > 0) {
+      date_default_timezone_set('Asia/Jakarta');
+      $currenttime = date('Y-m-d H:i:s');
+      $data = [
+        'kegiatan' => '-',
+        'id_kayawan' => $this->session->userdata('id'),
+        'jam_pulang' => NULL,
+        'jam_masuk' => NULL,
+        'date' => date('Y-m-d'),
+        'keterangan_izin' => $this->input->post('izin'),
+        'status' => 'done'
+      ];
+      $query = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
+      $id = $query->row_array();
+      $this->m_model->ubah_data('absensi', $data, array('id' => $id['id']));
+      $this->m_model->add('absensi', $data);
+      redirect(base_url('karyawan/history_absen'));
+    } else {
+      $data = [
+        'kegiatan' => '-',
+        'id_kayawan' => $this->session->userdata('id'),
+        'jam_pulang' => NULL,
+        'jam_masuk' => NULL,
+        'date' => date('Y-m-d'),
+        'keterangan_izin' => $this->input->post('izin'),
+        'status' => 'done'
+      ];
+
+      $this->m_model->add('absensi', $data);
+      redirect(base_url('karyawan/history_absen'));
+    }
+  }
   public function history_absen()
   {
     $idKaryawan = $this->session->userdata('id');
@@ -81,7 +124,7 @@ class Karyawan extends CI_Controller
 
     $foto = $this->upload_images('foto');
     if ($foto[0] == false) {
-      $data = [   
+      $data = [
         'foto' => 'User.png',
         'email' => $email,
         'username' => $username,
@@ -102,7 +145,7 @@ class Karyawan extends CI_Controller
       } else {
         $this->session->set_flashdata('message', 'password baru dan konfirmasi password harus sama...');
         redirect(base_url('karyawan/profile'));
-      } 
+      }
     }
     // lakukan pembaruan data
     $this->session->set_userdata($data);
@@ -154,21 +197,21 @@ class Karyawan extends CI_Controller
     $id = $this->input->post('id');
     $user_id = $this->session->userdata('id');
 
-      $data = [
-        'keterangan_izin' => $this->input->post('keterangan_izin'),
-        "jam_pulang" => "00:00:00",
-        "jam_masuk" => "00:00:00",
-        "kegiatan" => "-",
-        "status" => "done",
-      ];
-      $eksekusi = $this->m_model->ubah_data('absensi', $data, array('id' => $this->input->post('id')));
-      if ($eksekusi) {
-        $this->session->set_flashdata('berhasil_izin', 'Berhasil untuk izin');
-        redirect(base_url('karyawan/history_absen'));
-      } else {
-        $this->session->set_flashdata('gagal_izin', "Gagal memberi keterangan izin");
-        redirect(base_url('karyawan/menu_absensi/' . $this->input->post('id')));
-      }
+    $data = [
+      'keterangan_izin' => $this->input->post('keterangan_izin'),
+      "jam_pulang" => "00:00:00",
+      "jam_masuk" => "00:00:00",
+      "kegiatan" => "-",
+      "status" => "done",
+    ];
+    $eksekusi = $this->m_model->ubah_data('absensi', $data, array('id' => $this->input->post('id')));
+    if ($eksekusi) {
+      $this->session->set_flashdata('berhasil_izin', 'Berhasil untuk izin');
+      redirect(base_url('karyawan/history_absen'));
+    } else {
+      $this->session->set_flashdata('gagal_izin', "Gagal memberi keterangan izin");
+      redirect(base_url('karyawan/menu_absensi/' . $this->input->post('id')));
+    }
   }
 
   public function hapus_karyawan($id)

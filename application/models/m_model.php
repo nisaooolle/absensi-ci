@@ -117,18 +117,31 @@ class M_model extends CI_Model
         $this->load->database();
         $end_date = date('Y-m-d');
         $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));
-        $query = $this->db->select('date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status, COUNT(*) AS total_absences')
+        $query = $this->db->select('absensi.*, user.nama_depan, user.nama_belakang,date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status, COUNT(*) AS total_absences')
             ->from('absensi')
+            ->join('user', 'absensi.id_karyawan = user.id','left')
             ->where('date >=', $start_date)
             ->where('date <=', $end_date)
             ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status')
             ->get();
         return $query->result_array();
     }
-    public function getAbsensiLast30Days($date)
+    public function getbulanan($bulan)
     {
+        $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
         $this->db->from('absensi');
-        $this->db->where("DATE_FORMAT(absensi.date,'%m') =", $date);
+        $this->db->join('user', 'absensi.id_karyawan = user.id', 'left');
+        $this->db->where("DATE_FORMAT(absensi.date,'%m') =", $bulan);
+        $db = $this->db->get();
+        $result = $db->result();
+        return $result;
+    }
+    public function getDailyData($date)
+    {
+        $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
+        $this->db->from('absensi');
+        $this->db->join('user', 'absensi.id_karyawan = user.id', 'left');
+        $this->db->where('date', $date);
         $query = $this->db->get();
         return $query->result();
     }

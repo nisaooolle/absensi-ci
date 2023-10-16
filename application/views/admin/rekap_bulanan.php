@@ -431,7 +431,7 @@
 
     .table td,
     .table th {
-        padding: 25px 49px;
+        padding: 25px 45px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -507,7 +507,10 @@
                     <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
                 </li>
                 <li>
-                    <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+                    <i class="fa-solid fa-signal"></i><a href="rekap_seluruh">Rekapan Karyawan</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-signal"></i><a href="rekapan_harian">Rekapan Harian</a>
                 </li>
                 <li>
                     <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
@@ -553,85 +556,146 @@
                 </div>
             </div>
         </nav>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
 
-        <section class="charts mt-4">
-            <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
-            <br>
-            <form action="<?php echo base_url('admin/rekap_bulanan') ?>" method="post">
-                <select name="bulan" id="bulan">
-                    <option selected>Cari Bulan</option>
-                    <option value="01">Januari</option>
-                    <option value="02">Februari</option>
-                    <option value="03">Maret</option>
-                    <option value="04">April</option>
-                    <option value="05">Mei</option>
-                    <option value="06">Juni</option>
-                    <option value="07">Juli</option>
-                    <option value="08">Agustus</option>
-                    <option value="09">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                </select>
-            </form>
-            <div class="table">
-                <table>
-                    <tr>
-                        <th>NO</th>
-                        <th>
-                            KEGIATAN
-                        </th>
-                        <th>TANGGAL</th>
-                        <th>JAM MASUK</th>
-                        <th>JAM PULANG</th>
-                        <th>KETERANGAN IZIN</th>
+    <section class="charts mt-4">
+        <br>
+        <form action="<?php echo base_url('admin/rekap_bulanan') ?>" method="post">
+            <select name="bulan" id="bulan">
+                <option selected>Cari Bulan</option>
+                <option value="01">Januari</option>
+                <option value="02">Februari</option>
+                <option value="03">Maret</option>
+                <option value="04">April</option>
+                <option value="05">Mei</option>
+                <option value="06">Juni</option>
+                <option value="07">Juli</option>
+                <option value="08">Agustus</option>
+                <option value="09">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+            </select>
+        </form>
+        <form action="<?php echo base_url('admin/export_rekap_bulanan') ?>" method="post">
+            <select name="bulan" id="bulan" method="get">
+                <option selected>Cari Bulan untuk export</option>
+                <option value="01">Januari</option>
+                <option value="02">Februari</option>
+                <option value="03">Maret</option>
+                <option value="04">April</option>
+                <option value="05">Mei</option>
+                <option value="06">Juni</option>
+                <option value="07">Juli</option>
+                <option value="08">Agustus</option>
+                <option value="09">September</option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+            </select>
+            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</button>
+        </form>
+        <div class="table">
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Karyawan</th>
+                    <th>Kegiatan</th>
+                    <th>Date</th>
+                    <th>Jam Masuk</th>
+                    <th>Jam Pulang</th>
+                    <th>Keterangan Izin</th>
+                </tr>
+                <?php $no = 0;
+                foreach ($absensi as $absen) : $no++ ?>
+                    <tr class="whitespace-nowrap">
+                        <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                        <td data-cell="Nama Karyawan">
+                            <?php echo $absen->nama_depan . ' ' . $absen->nama_belakang; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                            <div class="text-sm text-gray-900">
+                                <?php echo $absen->kegiatan ?>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4">
+                            <div class="text-sm text-gray-900">
+                                <?php echo $absen->date ?>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4">
+                            <div class="text-sm text-gray-900">
+                                <?php echo $absen->jam_masuk ?>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4">
+                            <div class="text-sm text-gray-900">
+                                <?php echo $absen->jam_pulang ?>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4">
+                            <div class="text-sm text-gray-900">
+                                <?php echo $absen->keterangan_izin ?>
+                            </div>
+                        </td>
                     </tr>
-                    <?php $no = 0;
-                    foreach ($absensi as $absen) : $no++ ?>
-                        <tr class="whitespace-nowrap">
-                            <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
-                            <td class="px-3 py-4">
-                                <div class="text-sm text-gray-900">
-                                    <?php echo $absen->kegiatan ?>
-                                </div>
-                            </td>
-                            <td class="px-3 py-4">
-                                <div class="text-sm text-gray-900">
-                                    <?php echo $absen->date ?>
-                                </div>
-                            </td>
-                            <td class="px-3 py-4">
-                                <div class="text-sm text-gray-900">
-                                    <?php echo $absen->jam_masuk ?>
-                                </div>
-                            </td>
-                            <td class="px-3 py-4">
-                                <div class="text-sm text-gray-900">
-                                    <?php echo $absen->jam_pulang ?>
-                                </div>
-                            </td>
-                            <td class="px-3 py-4">
-                                <div class="text-sm text-gray-900">
-                                    <?php echo $absen->keterangan_izin ?>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                </table>
-            </div>
-        </section>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                // Add an event listener for the "change" event on the select element
-                var selectElement = document.getElementById('bulan');
-                var formElement = selectElement.form; // Get the parent form
+                <?php endforeach ?>
+            </table>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add an event listener for the "change" event on the select element
+            var selectElement = document.getElementById('bulan');
+            var formElement = selectElement.form; // Get the parent form
 
-                selectElement.addEventListener('change', function() {
-                    formElement.submit(); // Submit the form when the select element changes
-                });
+            selectElement.addEventListener('change', function() {
+                formElement.submit(); // Submit the form when the select element changes
             });
-        </script>
+        });
+
+        function $(selector) {
+            return document.querySelector(selector)
+        }
+
+        function find(el, selector) {
+            let finded
+            return (finded = el.querySelector(selector)) ? finded : null
+        }
+
+        function siblings(el) {
+            const siblings = []
+            for (let sibling of el.parentNode.children) {
+                if (sibling !== el) {
+                    siblings.push(sibling)
+                }
+            }
+            return siblings
+        }
+
+        const showAsideBtn = $('.show-side-btn')
+        const sidebar = $('.sidebar')
+        const wrapper = $('#wrapper')
+
+        showAsideBtn.addEventListener('click', function() {
+            $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+            wrapper.classList.toggle('fullwidth')
+        })
+
+        if (window.innerWidth < 767) {
+            sidebar.classList.add('show-sidebar');
+        }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 767) {
+                sidebar.classList.remove('show-sidebar')
+            }
+        })
+        $('.sidebar .close-aside').addEventListener('click', function() {
+            $(`#${this.dataset.close}`).classList.add('show-sidebar')
+            wrapper.classList.remove('margin')
+        })
+    </script>
 </body>
 
 </html>

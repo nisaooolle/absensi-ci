@@ -541,9 +541,8 @@
             </div>
         </nav>
         <div class="texta">
-            <form action="">
-                <label for="" style="color:#6E7C7C;
-    font-weight: bold;">Keterangan Izin / Cuti</label>
+            <form method="post" action="<?php echo base_url('karyawan/aksi_izin') ?>">
+                <label>Keterangan Izin / Cuti</label>
                 <br>
                 <textarea name="izin" id="" cols="100" rows="10"></textarea>
                 <button class="submit">SUBMIT</button>

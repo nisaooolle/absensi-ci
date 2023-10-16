@@ -570,7 +570,6 @@ td::before {
                 <div class="d-flex align-items-center">
                   <h3 class="mb-0"><?php echo $total_absen ?></h3> <span class="d-block ms-2">Total Masuk Kerja</span>
                 </div>
-                <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
               </div>
             </div>
           </div>
@@ -581,7 +580,6 @@ td::before {
                 <div class="d-flex align-items-center">
                   <h3 class="mb-0"><?php echo $total_izin ?></h3> <span class="d-block ms-2">Total Cuti</span>
                 </div>
-                <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
               </div>
             </div>
           </div>
@@ -590,9 +588,8 @@ td::before {
               <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
-                  <h3 class="mb-0">5,245</h3> <span class="d-block ms-2">Total Users</span>
+                  <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
                 </div>
-                <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
               </div>
             </div>
           </div>

@@ -1058,38 +1058,34 @@
         }
 
         .back i {
-            margin-left: 40px;
-            margin-top: 40px;
+            margin-right: 50px;
+            margin-top: 10px;
             font-size: 25px;
         }
     </style>
 </head>
 
 <body class="profile-page sidebar-collapse">
-    <?php foreach ($user as $data_akun) : ?>
-        <div class="wrapper">
-            <div class="page-header clear-filter" filter-color="orange">
-                <div class="page-header-image" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1557053819-aa6046add523?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80');">
-                </div>
-                <div class="container">
-                    <?php foreach ($user as $row) : ?>
-                        <div class="photo-container">
-                            <img src="<?php echo base_url('images/karyawan/' . $row->foto) ?>">
-                        </div>
-                    <?php endforeach; ?>
-                    <h3 class="title"><?php echo $data_akun->email ?></h3>
-                    <p class="category"><?php echo $data_akun->username ?></p>
-                </div>
-                <span class="back">
-                    <a href="/absensi-codeigniter3/karyawan"><i class="fa-solid fa-backward"></i>
-                    </a>
-                </span>
+    <div class="wrapper">
+        <div class="page-header clear-filter" filter-color="orange">
+            <div class="page-header-image" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1557053819-aa6046add523?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80');">
             </div>
-            <div class="section">
-                <div class="button-container">
-                    <a href="#button" class="btn btn-primary btn-round btn-lg">Edit Profile</a>
-                </div>
-                <div class="container">
+            <div class="container">
+                <?php foreach ($user as $row) : ?>
+                    <div class="photo-container">
+                        <img src="<?php echo base_url('images/karyawan/' . $row->foto) ?>">
+                    </div>
+                    <h3 class="title"><?php echo $row->email ?></h3>
+                    <p class="category"><?php echo $row->username ?></p>
+                    <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="section">
+            <div class="button-container">
+                <a href="#button" class="btn btn-primary btn-round btn-lg">Edit Profile</a>
+            </div>
+            <div class="container">
+                <?php foreach ($user as $data_akun) : ?>
                     <form id="button" action="<?php echo base_url('karyawan/aksi_akun') ?>" enctype="multipart/form-data" method="post" class="row">
                         <div class="mb-3 col-6">
                             <label for="nama" class="form-label">Email</label>
@@ -1113,11 +1109,15 @@
                         </div>
                         <button type="submit" class="btn btn-primary" name="submit">Ubah</button>
                     </form>
-                </div>
+                <?php endforeach; ?>
+                <span class="back">
+                    <a href="/absensi-codeigniter3/karyawan"><i class="fa-solid fa-backward"></i>
+                    </a>
+                </span>
             </div>
-
         </div>
-    <?php endforeach; ?>
+
+    </div>
 
 
 

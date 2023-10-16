@@ -148,23 +148,26 @@
     padding-right: 7px;
     margin-top: -3px;
   }
+
   @media (max-width:600px) {
     .login_box {
 
       margin-left: 20rem;
     }
   }
+
   .form-group {
     position: relative;
-}
+  }
 
-.password-toggle {
+  .password-toggle {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 10px; /* Anda bisa menyesuaikan jarak kanan sesuai kebutuhan */
+    right: 10px;
+    /* Anda bisa menyesuaikan jarak kanan sesuai kebutuhan */
     cursor: pointer;
-}
+  }
 </style>
 
 <body>
@@ -183,7 +186,7 @@
               <div class="form-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
                 <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
-              </div>              <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
+              </div> <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
               <input type="text" name="nama_belakang" placeholder="NAMA BELAKANG" required="">
               <input type="hidden" name="role" value="admin">
               <input type="hidden" name="foto" value="user.png">

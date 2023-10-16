@@ -1,90 +1,94 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
-	public function index()
-	{
-		$this->load->view('auth/login');
-	}
-	public function register_karyawann()
-	{
-		$this->load->view('auth/register_karyawan');
-	}
-	public function register_adminn()
-	{
-		$this->load->view('auth/register_admin');
-	}
-	function __construct()
+class Auth extends CI_Controller
+{
+  public function index()
+  {
+    $this->load->view('auth/login');
+  }
+  public function register_karyawann()
+  {
+    $this->load->view('auth/register_karyawan');
+  }
+  public function register_adminn()
+  {
+    $this->load->view('auth/register_admin');
+  }
+  function __construct()
   {
     parent::__construct();
     $this->load->model('m_model');
     $this->load->library('form_validation');
   }
-  
-  public function aksi_login() {
 
-  $email = $this->input->post('email', true);
-  $password = $this->input->post('password', true);
-  // vaiable data berfungsi untuk mengambil yg diinputkan
-  $data = ['email' => $email,];
-  $query = $this->m_model->getwhere('user', $data);
-  // result berfngsi menjalankan query nya
-  $result = $query->row_array();
+  public function aksi_login()
+  {
+
+    $email = $this->input->post('email', true);
+    $password = $this->input->post('password', true);
+    // vaiable data berfungsi untuk mengambil yg diinputkan
+    $data = ['email' => $email,];
+    $query = $this->m_model->getwhere('user', $data);
+    // result berfngsi menjalankan query nya
+    $result = $query->row_array();
 
 
-  if (!empty($result)  && md5($password) === $result['password']) {
-    $data = [
-      'logged_in' => TRUE,
-      // yg didalam array ngambil dari database
-      'email'     => $result['email'],
-      'username'  => $result['username'],
-      'role'      => $result['role'],
-      'id'        => $result['id'],
-    ];
-    // session dibawah berfngsi untk penampungan sementara
-    $this->session->set_userdata($data);
-    // validasi dbwh mengecek apakah role itu "admin"
-    if ($this->session->userdata('role') == 'admin') {
-      redirect(base_url()."admin/dasboard");
-    }elseif ($this->session->userdata('role') == 'karyawan') {
+    if (!empty($result)  && md5($password) === $result['password']) {
       $data = [
-        'id_karyawan' => $result['id'],
-        'date' => date('Y-m-d'),
-        'jam_masuk' => date('H:i:s'),
-        'kegiatan' => '-',
-        'jam_pulang' => '00:00:00',
-        'keterangan_izin' => '-',
-        'status' => 'not',
+        'logged_in' => TRUE,
+        // yg didalam array ngambil dari database
+        'email'     => $result['email'],
+        'username'  => $result['username'],
+        'role'      => $result['role'],
+        'id'        => $result['id'],
       ];
-      $this->m_model->tambah_data('absensi', $data);
-      redirect(base_url()."karyawan");
+      // session dibawah berfngsi untk penampungan sementara
+      $this->session->set_userdata($data);
+      // validasi dbwh mengecek apakah role itu "admin"
+      if ($this->session->userdata('role') == 'admin') {
+        redirect(base_url() . "admin/dasboard");
+      } elseif ($this->session->userdata('role') == 'karyawan') {
+        $data = [
+          'id_karyawan' => $result['id'],
+          'date' => date('Y-m-d'),
+          'jam_masuk' => date('H:i:s'),
+          'kegiatan' => '-',
+          'jam_pulang' => '00:00:00',
+          'keterangan_izin' => '-',
+          'status' => 'not',
+        ];
+        $this->m_model->tambah_data('absensi', $data);
+        redirect(base_url() . "karyawan");
+      } else {
+        redirect(base_url() . "auth");
+      }
     } else {
-      redirect(base_url()."auth");
+      redirect(base_url() . "auth");
     }
-  } else {
-    redirect(base_url()."auth");
   }
-}
 
-function logout() {
-  // sess_detroy berfungsi menghapus semua yg ada di session
-  $this->session->sess_destroy();
-  redirect(base_url('auth'));
-}
+  function logout()
+  {
+    // sess_detroy berfungsi menghapus semua yg ada di session
+    $this->session->sess_destroy();
+    redirect(base_url('auth'));
+  }
 
-public function register_admin() {
-  // Validasi form
-  $this->form_validation->set_rules('email', 'email', 'required');
-  $this->form_validation->set_rules('username', 'Username', 'required');
-  $this->form_validation->set_rules('nama_depan', 'nama_depan', 'required');
-  $this->form_validation->set_rules('nama_belakang', 'nama_belakang', 'required');
-  $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
-  $this->form_validation->set_rules('role', 'role', 'required');
+  public function register_admin()
+  {
+    // Validasi form
+    $this->form_validation->set_rules('email', 'email', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('nama_depan', 'nama_depan', 'required');
+    $this->form_validation->set_rules('nama_belakang', 'nama_belakang', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+    $this->form_validation->set_rules('role', 'role', 'required');
 
-  if ($this->form_validation->run() == FALSE) {
+    if ($this->form_validation->run() == FALSE) {
       // Jika validasi gagal, kembalikan ke halaman registrasi
       $this->load->view('auth/register_admin');
-  } else {
+    } else {
       // Jika validasi berhasil, simpan data ke database
       $email = $this->input->post('email');
       $username = $this->input->post('username');
@@ -95,29 +99,30 @@ public function register_admin() {
 
       // Pastikan nilai 'role' tetap 'admin'
       if ($role !== 'admin') {
-          $role = 'admin';
+        $role = 'admin';
       }
 
       // Simpan data ke database sesuai kebutuhan Anda
-      $this->m_model->register_user($email, $username,$nama_depan,$nama_belakang, $password, $role);
+      $this->m_model->register_user($email, $username, $nama_depan, $nama_belakang, $password, $role);
 
       // Redirect ke halaman sukses atau login
       redirect('auth');
+    }
   }
-}
-public function register_karyawan() {
-  // Validasi form
-  $this->form_validation->set_rules('email', 'email', 'required');
-  $this->form_validation->set_rules('username', 'Username', 'required');
-  $this->form_validation->set_rules('nama_depan', 'nama_depan', 'required');
-  $this->form_validation->set_rules('nama_belakang', 'nama_belakang', 'required');
-  $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
-  $this->form_validation->set_rules('role', 'role', 'required');
+  public function register_karyawan()
+  {
+    // Validasi form
+    $this->form_validation->set_rules('email', 'email', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('nama_depan', 'nama_depan', 'required');
+    $this->form_validation->set_rules('nama_belakang', 'nama_belakang', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+    $this->form_validation->set_rules('role', 'role', 'required');
 
-  if ($this->form_validation->run() == FALSE) {
+    if ($this->form_validation->run() == FALSE) {
       // Jika validasi gagal, kembalikan ke halaman registrasi
       $this->load->view('auth/register_karyawan');
-  } else {
+    } else {
       // Jika validasi berhasil, simpan data ke database
       $email = $this->input->post('email');
       $username = $this->input->post('username');
@@ -128,14 +133,14 @@ public function register_karyawan() {
 
       // Pastikan nilai 'role' tetap 'admin'
       if ($role !== 'karyawan') {
-          $role = 'karyawan';
+        $role = 'karyawan';
       }
 
       // Simpan data ke database sesuai kebutuhan Anda
-      $this->m_model->register_user($email, $username,$nama_depan,$nama_belakang, $password, $role);
+      $this->m_model->register_user($email, $username, $nama_depan, $nama_belakang, $password, $role);
 
       // Redirect ke halaman sukses atau login
       redirect('auth');
+    }
   }
-}
 }

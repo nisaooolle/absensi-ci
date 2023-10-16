@@ -507,7 +507,10 @@
           <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
         </li>
         <li>
-          <i class="fa-solid fa-signal"></i><a href="rekapan">Rekapan Karyawan</a>
+          <i class="fa-solid fa-signal"></i><a href="rekap_seluruh">Rekapan Karyawan</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-signal"></i><a href="rekapan_harian">Rekapan Harian</a>
         </li>
         <li>
           <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
@@ -572,7 +575,6 @@
               <div class="d-flex align-items-center">
                 <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
               </div>
-              <p class="fs-normal mb-0">Lorem ipsum dolor sit amet</p>
             </div>
           </div>
         </div>
