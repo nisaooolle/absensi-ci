@@ -12,8 +12,7 @@ class Admin extends CI_Controller
   {
     parent::__construct();
     $this->load->model('m_model');
-    // $this->load->helper('my_helper');
-    // $this->load->library('upload');
+    $this->load->library('upload');
     // fungsi validasi dibawah untuk ngecek ketika masuk ke halaman admin , data sdh true atau blm
     // kalo blm true maka akan kembali ke page auth
     if ($this->session->userdata('logged_in') != true || $this->session->userdata('role') != 'admin') {
@@ -23,9 +22,6 @@ class Admin extends CI_Controller
   public function dasboard()
   {
     $data['karya'] = $this->m_model->get_data('user')->num_rows();
-    $data['absen'] = $this->m_model->get_history('absensi', $this->session->userdata('id'))->result();
-    $data['total_absen'] = $this->m_model->get_absen('absensi', $this->session->userdata('id'))->num_rows();
-    $data['total_izin'] = $this->m_model->get_izin('absensi', $this->session->userdata('id'))->num_rows();
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $data['karyawan'] = $this->m_model->get_data('user')->result();
     $this->load->view('admin/dasboard', $data);
@@ -69,14 +65,16 @@ class Admin extends CI_Controller
     $sheet->setCellValue('A3', "ID");
     $sheet->setCellValue('B3', "EMAIL");
     $sheet->setCellValue('C3', "USERNAME");
-    $sheet->setCellValue('D3', "NAMA DEPAN");
-    $sheet->setCellValue('E3', "NAMA BELAKANG");
+    $sheet->setCellValue('D3', "FOTO");
+    $sheet->setCellValue('E3', "NAMA DEPAN");
+    $sheet->setCellValue('F3', "NAMA BELAKANG");
 
     $sheet->getStyle('A3')->applyFromArray($style_col);
     $sheet->getStyle('B3')->applyFromArray($style_col);
     $sheet->getStyle('C3')->applyFromArray($style_col);
     $sheet->getStyle('D3')->applyFromArray($style_col);
     $sheet->getStyle('E3')->applyFromArray($style_col);
+    $sheet->getStyle('F3')->applyFromArray($style_col);
 
     $data_karyawan = $this->m_model->get_data('user')->result();
 
@@ -86,14 +84,16 @@ class Admin extends CI_Controller
       $sheet->setCellValue('A' . $numrow, $data->id);
       $sheet->setCellValue('B' . $numrow, $data->email);
       $sheet->setCellValue('C' . $numrow, $data->username);
-      $sheet->setCellValue('D' . $numrow, $data->nama_depan);
-      $sheet->setCellValue('E' . $numrow, $data->nama_belakang);
+      $sheet->setCellValue('D' . $numrow, $data->foto);
+      $sheet->setCellValue('E' . $numrow, $data->nama_depan);
+      $sheet->setCellValue('F' . $numrow, $data->nama_belakang);
 
       $sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
+      $sheet->getStyle('F' . $numrow)->applyFromArray($style_row);
 
       $no++;
       $numrow++;
@@ -496,7 +496,7 @@ class Admin extends CI_Controller
  
      $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
  
-     $sheet->setTitle("LAPORAN DATA REKAPAN KESELURUHAN");
+     $sheet->setTitle("LAPORAN DATA KESELURUHAN");
      header('Content-Type: aplication/vnd.openxmlformants-officedocument.spreadsheetml.sheet');
      header('Content-Disposition: attachment; filename="REKAPAN KESELURUHAN.xlsx"');
      header('Cache-Control: max-age=0');
@@ -535,5 +535,71 @@ class Admin extends CI_Controller
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $data['absensi'] = $this->m_model->getData();
     $this->load->view('admin/rekap_seluruh', $data);
+  }
+
+  public function profile()
+  {
+    $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+    $this->load->view('admin/profile', $data);
+  }
+
+  public function aksi_akun()
+  {
+    $foto = $this->upload_images('foto');
+    $email = $this->input->post('email');
+    $username = $this->input->post('username');
+    $password_baru = $this->input->post('password_baru');
+    $konfirmasi_password = $this->input->post('konfirmasi_password');
+
+    $foto = $this->upload_images('foto');
+    if ($foto[0] == false) {
+      $data = [
+        'foto' => 'User.png',
+        'email' => $email,
+        'username' => $username,
+      ];
+    } else {
+      $data = [
+        'foto' => $foto[1],
+        'email' => $email,
+        'username' => $username,
+      ];
+    }
+
+    // jika ada pasword baru
+    if (!empty($password_baru)) {
+      // pastikan pasword sama
+      if ($password_baru === $konfirmasi_password) {
+        $data['password'] = md5($password_baru);
+      } else {
+        $this->session->set_flashdata('message', 'password baru dan konfirmasi password harus sama...');
+        redirect(base_url('admin/profile'));
+      }
+    }
+    // lakukan pembaruan data
+    $this->session->set_userdata($data);
+    $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+    if ($update_result) {
+      redirect(base_url('admin/profile'));
+    } else {
+      redirect(base_url('admin/profile'));
+    }
+  }
+
+  public function upload_images($value)
+  {
+    $kode = round(microtime(true)  * 1000);
+    $config['upload_path'] = './images/admin/';
+    $config['allowed_types'] = 'jpg|png|jpeg';
+    $config['max_size'] = '30000';
+    $config['file_name'] = $kode;
+    $this->upload->initialize($config);
+    if (!$this->upload->do_upload($value)) {
+      return array(false, '');
+    } else {
+      $fn = $this->upload->data();
+      $nama = $fn['file_name'];
+      return array(true, $nama);
+    }
   }
 }

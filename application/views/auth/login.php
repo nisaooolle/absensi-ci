@@ -160,15 +160,16 @@
 
   .form-group {
     position: relative;
-}
+  }
 
-.password-toggle {
+  .password-toggle {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 10px; /* Anda bisa menyesuaikan jarak kanan sesuai kebutuhan */
+    right: 10px;
+    /* Anda bisa menyesuaikan jarak kanan sesuai kebutuhan */
     cursor: pointer;
-}
+  }
 </style>
 
 <body>
@@ -178,7 +179,7 @@
     <section class="login">
       <div class="login_box">
         <div class="left">
-          <div class="top_link"><a href="/project-codeigniter-3"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
+          <div class="top_link"><a href="/absensi-codeigniter3"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
           <div class="contact">
             <form action="<?php echo base_url(); ?>Auth/aksi_login" method="post">
               <h3>SIGN IN</h3>

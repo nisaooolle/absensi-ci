@@ -217,7 +217,9 @@
         color: var(--dk-gray-400)
     }
 
-
+    .charts a {
+        margin-left: 25px;
+    }
 
 
     /** --------------------------------
@@ -494,7 +496,7 @@
         <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
             <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
-                <img class="rounded-pill img-fluid" width="65" src="https://uniim1.shutterfly.com/ng/services/mediarender/THISLIFE/021036514417/media/23148907008/medium/1501685726/enhance" alt="">
+                <img src="<?php echo base_url('images/karyawan/' . $data_akun->foto) ?>" width="65" class="rounded-pill img-fluid">
                 <div class="ms-2">
                     <h5 class="fs-6 mb-0">
                         <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>
@@ -559,42 +561,45 @@
     <?php endforeach; ?>
 
     <section class="charts mt-4">
+        <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Rekap Bulanan</h2>
         <br>
-        <form action="<?php echo base_url('admin/rekap_bulanan') ?>" method="post">
-            <select name="bulan" id="bulan">
-                <option selected>Cari Bulan</option>
-                <option value="01">Januari</option>
-                <option value="02">Februari</option>
-                <option value="03">Maret</option>
-                <option value="04">April</option>
-                <option value="05">Mei</option>
-                <option value="06">Juni</option>
-                <option value="07">Juli</option>
-                <option value="08">Agustus</option>
-                <option value="09">September</option>
-                <option value="10">Oktober</option>
-                <option value="11">November</option>
-                <option value="12">Desember</option>
-            </select>
-        </form>
-        <form action="<?php echo base_url('admin/export_rekap_bulanan') ?>" method="post">
-            <select name="bulan" id="bulan" method="get">
-                <option selected>Cari Bulan untuk export</option>
-                <option value="01">Januari</option>
-                <option value="02">Februari</option>
-                <option value="03">Maret</option>
-                <option value="04">April</option>
-                <option value="05">Mei</option>
-                <option value="06">Juni</option>
-                <option value="07">Juli</option>
-                <option value="08">Agustus</option>
-                <option value="09">September</option>
-                <option value="10">Oktober</option>
-                <option value="11">November</option>
-                <option value="12">Desember</option>
-            </select>
-            <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</button>
-        </form>
+        <div style="display: flex;">
+            <form action="<?php echo base_url('admin/rekap_bulanan') ?>" method="post">
+                <select name="bulan" id="bulan" style="border-radius: 20px; width: 202px; height: 35px; font-size: 15px;margin-left: 40px;">
+                    <option selected>Pilih Bulan Untuk Ditampilkan</option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+            </form>
+            <form action="<?php echo base_url('admin/export_rekap_bulanan') ?>" method="post">
+                <select name="bulan" id="bulan" style="border-radius: 20px; width: 202px; height: 35px; font-size: 15px;margin-left: 40px;">
+                    <option selected>Pilih Bulan Untuk Export</option>
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                </select>
+                <button type="submit" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</button>
+            </form>
+        </div>
         <div class="table">
             <table>
                 <tr>

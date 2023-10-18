@@ -7,15 +7,21 @@ class M_model extends CI_Model
         return $this->db->get($table);
     }
 
-    public function get_izin($table,$id_karyawan) {
-        return $this->db->where('id_karyawan',$id_karyawan)
-        ->where('kegiatan', '-')
-        ->get($table);
+    public function get_izin($table, $id_karyawan)
+    {
+        return $this->db->where('id_karyawan', $id_karyawan)
+            ->where('keterangan_izin', '-')
+            ->get($table);
     }
-    public function get_absen($table,$id_karyawan) {
-        return $this->db->where('id_karyawan',$id_karyawan)
-        ->where('keterangan_izin', '-')
-        ->get($table);
+    public function get_absen($id_karyawan)
+    {
+     $this->db->select('absensi.*,user.id, COUNT(IF(jam_masuk != "00:00:00",TIME_TO_SEC(jam_masuk),0)) as total_jam_masuk');
+     $this->db->where('absensi.id_karyawan',$id_karyawan);
+     $this->db->where('jam_masuk !=','00:00:00');
+     $this->db->join('user','user.id = absensi.id_karyawan','left');
+     $query = $this->db->get('absensi');
+     $result = $query->row();
+     return $result->total_jam_masuk;
     }
     public function get_history($table, $id_karyawan)
     {
@@ -119,7 +125,7 @@ class M_model extends CI_Model
         $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));
         $query = $this->db->select('absensi.*, user.nama_depan, user.nama_belakang,date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status, COUNT(*) AS total_absences')
             ->from('absensi')
-            ->join('user', 'absensi.id_karyawan = user.id','left')
+            ->join('user', 'absensi.id_karyawan = user.id', 'left')
             ->where('date >=', $start_date)
             ->where('date <=', $end_date)
             ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status')
@@ -144,5 +150,26 @@ class M_model extends CI_Model
         $this->db->where('date', $date);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function tambah_izin($table, $data)
+    {
+        $this->db->insert($table, $data);
+        return $this->db->insert_id();
+    }
+    public function get_absen_by_tanggal($tanggal, $id_karyawan)
+    {
+        return $this->db->where('id_karyawan', $id_karyawan)
+            ->where('date', $tanggal)
+            ->where('keterangan_izin', '-')
+            ->where('status', 'not')
+            ->get('absensi');
+    }
+    public function get_izin_by_tanggal($tanggal, $id_karyawan)
+    {
+        return $this->db->where('id_karyawan', $id_karyawan)
+            ->where('date', $tanggal)
+            ->where('kegiatan', '-')
+            ->get('absensi');
     }
 }

@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 class Karyawan extends CI_Controller
 {
 
@@ -26,7 +23,7 @@ class Karyawan extends CI_Controller
     $data['karyawan'] = $data_karyawan;
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $data['absen'] = $this->m_model->get_history('absensi', $this->session->userdata('id'))->result();
-    $data['total_absen'] = $this->m_model->get_absen('absensi', $this->session->userdata('id'))->num_rows();
+    $data['total_absen'] = $this->m_model->get_absen($this->session->userdata('id'));
     $data['total_izin'] = $this->m_model->get_izin('absensi', $this->session->userdata('id'))->num_rows();
     $data['karya'] = $this->m_model->get_data('user')->num_rows();
     $this->load->view('karyawan/index', $data);
@@ -57,48 +54,6 @@ class Karyawan extends CI_Controller
   {
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $this->load->view('karyawan/menu_izin', $data);
-  }
-  public function aksi_izin()
-  {
-    $tanggal = date('Y-m-d');
-    $query_absen = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
-    $validasi_absen = $query_absen->num_rows();
-    $query_izin = $this->m_model->get_izin_by_tanggal($tanggal, $this->session->userdata('id'));
-    $validasi_izin = $query_izin->num_rows();
-    if ($validasi_izin > 0) {
-      $this->session->set_flashdata('error', 'error ');
-      redirect(base_url('karyawan/menu_izin'));
-    } else if ($validasi_absen > 0) {
-      date_default_timezone_set('Asia/Jakarta');
-      $currenttime = date('Y-m-d H:i:s');
-      $data = [
-        'kegiatan' => '-',
-        'id_kayawan' => $this->session->userdata('id'),
-        'jam_pulang' => NULL,
-        'jam_masuk' => NULL,
-        'date' => date('Y-m-d'),
-        'keterangan_izin' => $this->input->post('izin'),
-        'status' => 'done'
-      ];
-      $query = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
-      $id = $query->row_array();
-      $this->m_model->ubah_data('absensi', $data, array('id' => $id['id']));
-      $this->m_model->add('absensi', $data);
-      redirect(base_url('karyawan/history_absen'));
-    } else {
-      $data = [
-        'kegiatan' => '-',
-        'id_kayawan' => $this->session->userdata('id'),
-        'jam_pulang' => NULL,
-        'jam_masuk' => NULL,
-        'date' => date('Y-m-d'),
-        'keterangan_izin' => $this->input->post('izin'),
-        'status' => 'done'
-      ];
-
-      $this->m_model->add('absensi', $data);
-      redirect(base_url('karyawan/history_absen'));
-    }
   }
   public function history_absen()
   {
@@ -218,5 +173,48 @@ class Karyawan extends CI_Controller
   {
     $this->m_model->delete('absensi', 'id', $id);
     redirect(base_url('karyawan/history_absen'));
+  }
+
+  public function aksi_izin()
+  {
+    $tanggal = date('Y-m-d');
+    $query_absen = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
+    $validasi_absen = $query_absen->num_rows();
+    $query_izin = $this->m_model->get_izin_by_tanggal($tanggal, $this->session->userdata('id'));
+    $validasi_izin = $query_izin->num_rows();
+    if ($validasi_izin > 0) {
+      $this->session->set_flashdata('error', 'error ');
+      redirect(base_url('karyawan/menu_izin'));
+    } else if ($validasi_absen > 0) {
+      date_default_timezone_set('Asia/Jakarta');
+      $currenttime = date('Y-m-d H:i:s');
+      $data = [
+        'kegiatan' => '-',
+        'id_karyawan' => $this->session->userdata('id'),
+        'jam_pulang' => NULL,
+        'jam_masuk' => NULL,
+        'date' => date('Y-m-d'),
+        'keterangan_izin' => $this->input->post('izin'),
+        'status' => 'done'
+      ];
+      $query = $this->m_model->get_absen_by_tanggal($tanggal, $this->session->userdata('id'));
+      $id = $query->row_array();
+      $this->m_model->ubah_data('absensi', $data, array('id' => $id['id']));
+      $this->m_model->add('absensi', $data);
+      redirect(base_url('karyawan/history_absen'));
+    } else {
+      $data = [
+        'kegiatan' => '-',
+        'id_kayawan' => $this->session->userdata('id'),
+        'jam_pulang' => NULL,
+        'jam_masuk' => NULL,
+        'date' => date('Y-m-d'),
+        'keterangan_izin' => $this->input->post('izin'),
+        'status' => 'done'
+      ];
+
+      $this->m_model->add('absensi', $data);
+      redirect(base_url('karyawan/history_absen'));
+    }
   }
 }

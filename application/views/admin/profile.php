@@ -1073,11 +1073,11 @@
             <div class="container">
                 <?php foreach ($user as $row) : ?>
                     <div class="photo-container">
-                        <img src="<?php echo base_url('images/karyawan/' . $row->foto) ?>">
+                        <img src="<?php echo base_url('images/admin/' . $row->foto) ?>">
                     </div>
-                    <?php endforeach; ?>
-                    <h3 class="title"><?php echo $row->email ?></h3>
-                    <p class="category"><?php echo $row->username ?></p>
+                <?php endforeach; ?>
+                <h3 class="title"><?php echo $row->email ?></h3>
+                <p class="category"><?php echo $row->username ?></p>
             </div>
         </div>
         <div class="section">
@@ -1086,7 +1086,7 @@
             </div>
             <div class="container">
                 <?php foreach ($user as $data_akun) : ?>
-                    <form id="button" action="<?php echo base_url('karyawan/aksi_akun') ?>" enctype="multipart/form-data" method="post" class="row">
+                    <form id="button" action="<?php echo base_url('admin/aksi_akun') ?>" enctype="multipart/form-data" method="post" class="row">
                         <div class="mb-3 col-6">
                             <label for="nama" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email" value="<?php echo $data_akun->email ?>">
@@ -1111,7 +1111,7 @@
                     </form>
                 <?php endforeach; ?>
                 <span class="back">
-                    <a href="/absensi-codeigniter3/karyawan"><i class="fa-solid fa-backward"></i>
+                    <a href="/absensi-codeigniter3/admin/dasboard"><i class="fa-solid fa-backward"></i>
                     </a>
                 </span>
             </div>

@@ -523,7 +523,7 @@
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
             <div class="sidebar-header d-flex justify-content-center align-items-center px-3 py-4">
-                <img class="rounded-pill img-fluid" width="65" src="https://uniim1.shutterfly.com/ng/services/mediarender/THISLIFE/021036514417/media/23148907008/medium/1501685726/enhance" alt="">
+                <img src="<?php echo base_url('images/karyawan/' . $data_akun->foto) ?>" width="65" class="rounded-pill img-fluid">
                 <div class="ms-2">
                     <h5 class="fs-6 mb-0">
                         <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>

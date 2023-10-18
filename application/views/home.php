@@ -28,13 +28,14 @@ a {
   background-size: cover;
   color: white;
   text-align: center;
+  height: 23.2rem;
 }
 
 .top-wrapper h1 {
   opacity: 0.7;
   font-size: 45px;
   letter-spacing: 5px;
-  margin-bottom: 10px;
+  margin-top: 55px;
 }
 
 .top-wrapper p {
@@ -207,15 +208,12 @@ footer {
     <div class="top-wrapper">
       <div class="container">
         <h1>ABSENSI KARYAWAN.</h1>
-        <h1>BELAJAR MENJADI LEBIH KREATIF.</h1>
-        <p>Progate adalah platform online untuk belajar coding.</p>
-        <p>Kami menawarkan lingkungan pemograman yang lengkap untuk mempermudah Anda memulai.</p>
+        <h1>LOGIN SEBAGAI KARYAWAN UNTUK ABSEN</h1>
       </div>
     </div>
-    <div class="lesson-wrapper">
+    <!-- <div class="lesson-wrapper">
       <div class="container">
         <div class="heading">
-          <h2>Cari tau dari mana Anda mau memulai!</h2>
         </div>
         <div class="lessons">
           <div class="lesson">
@@ -248,21 +246,12 @@ footer {
           </div>
         </div>
       </div>
-    </div>
-    <div class="message-wrapper">
-      <div class="container">
-        <div class="heading">
-          <h2>Apakah Anda siap untuk menjadi programer yang handal?</h2>
-          <h3>Ayo belajar coding, ayo belajar menjadi lebih kreatif!</h3>
-        </div>
-        <span class="btn message">Mulai Belajar</span>
-      </div>
-    </div>
+    </div> -->
+<!--    
     <footer>
       <div class="container">
         <img src="https://prog-8.com/images/html/advanced/footer_logo.png">
-        <p>Learn to code, learn to be creative.</p>
       </div>
-    </footer>
+    </footer> -->
   </body>
 </html>
