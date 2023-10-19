@@ -490,6 +490,7 @@
 </style>
 
 <body>
+  <!-- sidebar -->
   <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
     <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
     <?php foreach ($user as $data_akun) : ?>
@@ -522,6 +523,7 @@
   </aside>
 
   <section id="wrapper">
+    <!-- navbar -->
     <nav class="navbar navbar-expand-md">
       <div class="container-fluid mx-2">
         <div class="navbar-header">
@@ -581,6 +583,7 @@
       </div>
     </section>
 
+    <!-- tabel data karyawan & export -->
     <section class="charts mt-4">
     <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Data Karyawan</h2>
       <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>

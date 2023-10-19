@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
   img {
@@ -188,7 +191,12 @@
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
                 <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
               </div>
-              <button class="submit">LET'S GO</button>
+              <div class="row">
+                <small>Belum memiliki akun ? silahkan <a href="auth/register_admin">Register</a></small>
+              </div>
+              <!-- <a href="auth/register_admin" style="text-decoration: none; color: #6E7C7C;">Reg Admin</a> ||
+              <a href="auth/register_karyawan" style="text-decoration: none; color: #6E7C7C;">Reg Karyawan</a> -->
+              <button class="submit" type="submit" name="submit">LET'S GO</button>
             </form>
           </div>
         </div>
@@ -220,6 +228,34 @@
     }
   }
 </script>
+<?php if ($this->session->flashdata('berhasil_login')) : ?>
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil login',
+      text: '<?= $this->session->flashdata('berhasil_login') ?>',
+      background: '#fff',
+      customClass: {
+        title: 'text-dark',
+        content: 'text-dark'
+      }
+    });
+  </script>
+<?php endif; ?>
+<?php if ($this->session->flashdata('gagal_login')) : ?>
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal',
+      text: '<?= $this->session->flashdata('gagal_login') ?>',
+      background: '#fff',
+      customClass: {
+        title: 'text-dark',
+        content: 'text-dark'
+      }
+    });
+  </script>
+<?php endif; ?>
 </body>
 
 </html>

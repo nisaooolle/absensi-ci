@@ -432,7 +432,7 @@
 
     .table td,
     .table th {
-        padding: 20px 20px;
+        padding: 20px 24px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -520,6 +520,7 @@
 </style>
 
 <body>
+    <!-- sidebar -->
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
@@ -543,6 +544,7 @@
         </ul>
     </aside>
 
+    <!-- NAVBAR -->
     <section id="wrapper">
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid mx-2">
@@ -570,7 +572,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <!-- <i class="fa-solid fa-bars"></i> -->
                                 <i data-show="show-side-navigation1" class="fa-solid fa-bars show-side-btn"></i>
                             </a>
                         </li>
@@ -578,6 +579,7 @@
                 </div>
             </div>
         </nav>
+        <!-- table -->
         <section class="charts mt-4">
             <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
             <div class="table">
@@ -643,6 +645,7 @@
             </div>
         </section>
         <script>
+            // fungsi untuk mengapus data per id
             function hapus(id) {
                 swal.fire({
                     title: 'Yakin untuk menghapus data ini?',
@@ -668,6 +671,7 @@
                 });
             }
 
+            // untuk responsive sidebar dan fungsi dropdown saat responsive
             function $(selector) {
                 return document.querySelector(selector)
             }

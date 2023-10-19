@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+  function __construct()
+  {
+    parent::__construct();
+    $this->load->model('m_model');
+    $this->load->library('form_validation');
+  }
   public function index()
   {
     $this->load->view('auth/login');
@@ -14,12 +20,6 @@ class Auth extends CI_Controller
   public function register_adminn()
   {
     $this->load->view('auth/register_admin');
-  }
-  function __construct()
-  {
-    parent::__construct();
-    $this->load->model('m_model');
-    $this->load->library('form_validation');
   }
 
   public function aksi_login()
@@ -45,10 +45,11 @@ class Auth extends CI_Controller
       ];
       // session dibawah berfngsi untk penampungan sementara
       $this->session->set_userdata($data);
-      // validasi dbwh mengecek apakah role itu "admin"
+      // validasi dbwh mengecek apakah role itu "admin" / "karyawan"
       if ($this->session->userdata('role') == 'admin') {
         redirect(base_url() . "admin/dasboard");
       } elseif ($this->session->userdata('role') == 'karyawan') {
+        // jika login menggunakan role karyawan makan akan otomatis di table karyawan menambah data trsbt
         $data = [
           'id_karyawan' => $result['id'],
           'date' => date('Y-m-d'),
@@ -58,9 +59,11 @@ class Auth extends CI_Controller
           'keterangan_izin' => '-',
           'status' => 'not',
         ];
+        // menambahkan data di table absensi
         $this->m_model->tambah_data('absensi', $data);
         redirect(base_url() . "karyawan");
       } else {
+        // Jika validasi gagal, kembalikan ke halaman login
         redirect(base_url() . "auth");
       }
     } else {

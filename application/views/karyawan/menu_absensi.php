@@ -519,6 +519,7 @@
 </style>
 
 <body>
+    <!-- sidebar -->
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
@@ -538,15 +539,10 @@
             <li class="">
                 <i class="fa-solid fa-clock-rotate-left"></i><a href="history_absen">History Absen</a>
             </li>
-            <!-- <li>
-                <i class="fa-solid fa-bars"></i><a href="menu_absensi"> Menu Absensi</a>
-            </li>
-            <li>
-                <i class="fa-solid fa-bars"></i><a href="menu_izin">Menu Izin</a>
-            </li> -->
         </ul>
     </aside>
 
+    <!-- navbar -->
     <section id="wrapper">
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid mx-2">
@@ -574,7 +570,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <!-- <i class="fa-solid fa-bars"></i> -->
                                 <i data-show="show-side-navigation1" class="fa-solid fa-bars show-side-btn"></i>
                             </a>
                         </li>
@@ -583,6 +578,7 @@
             </div>
         </nav>
 
+        <!-- textarea kegiatan -->
         <div class="texta">
             <?php foreach ($absen as $karyawan) : ?>
                 <form action="<?php echo base_url('karyawan/aksi_update_absensi') ?>" method="post">
@@ -591,6 +587,7 @@
                     <br>
                     <textarea name="kegiatan" id="" cols="100" rows="10"><?php echo $karyawan->kegiatan ?></textarea>
         </div>
+        <!-- tombol cancel izin dan submit -->
         <div class="flex px-3">
             <button type="button" class="btn btn-sm btn-danger text-danger-hover-none"><a class="text-light text-decoration-none" href="/absensi-codeigniter3/karyawan/history_absen">
                     Cancel</a>
@@ -616,7 +613,7 @@
     <?php endforeach ?>
     </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal izin -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form class="modal-content" method="post" action="<?php echo base_url('karyawan/aksi_keterangan_izin') ?>" enctype="multipart/form-data">
@@ -634,7 +631,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                    <!-- <button type="submit" name="submit" class="btn btn-primary">Save changes</button> -->
                 </div>
             </form>
         </div>
@@ -668,6 +664,7 @@
             });
         </script>
     <?php endif; ?>
+    <!-- sweatalert gagal izin saat gagal izin sblm pulang -->
     <script>
         function tampilSweetAlert() {
             Swal.fire({
@@ -682,6 +679,7 @@
             });
         }
     </script>
+    <!-- sweatalert keterangan gagal izin setelah izin  -->
     <script>
         function tampilSweetAlertKeterangan() {
             Swal.fire({
@@ -696,6 +694,7 @@
             });
         }
     </script>
+    <!-- untuk responsive side bar dan fungsi dropdown saat responsive -->
     <script>
         function $(selector) {
             return document.querySelector(selector)

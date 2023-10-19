@@ -7,20 +7,38 @@ class M_model extends CI_Model
         return $this->db->get($table);
     }
 
-    public function get_izin($table, $id_karyawan)
+    public function get_izin($id_karyawan)
     {
-        return $this->db->where('id_karyawan', $id_karyawan)
-            ->where('keterangan_izin', '-')
-            ->get($table);
+        // memilih kolom yg diperlukan dan menghitung total jam masuk
+        $this->db->select('absensi.*,user.id, COUNT(TIME_TO_SEC(jam_masuk)) AS total_jam_masuk');    
+        // membatasi hasil pencarian berdasarkan id karyawan 
+        $this->db->where('absensi.id_karyawan',$id_karyawan);
+        // membatasi hasil pencarian hanya untuk jam masuk dengan nilai '00:00:00'
+        $this->db->where('jam_masuk','00:00:00');
+        // menggabungkan table user dengan absensi menggunakan left join
+        $this->db->join('user','user.id = absensi.id_karyawan','left');
+        // menjalankan query untuk mengambil data ari table absensi
+        $query = $this->db->get('absensi');
+        // mengambil query untuk object tunggal 
+        $result = $query->row();
+        // mengembalikan total jam masuk
+        return $result->total_jam_masuk;
     }
     public function get_absen($id_karyawan)
     {
+     // memilih kolom yg diperlukan dan menghitung total jam masuk
      $this->db->select('absensi.*,user.id, COUNT(IF(jam_masuk != "00:00:00",TIME_TO_SEC(jam_masuk),0)) as total_jam_masuk');
+     // membatasi hasil pencarian berdasarkan id karyawan 
      $this->db->where('absensi.id_karyawan',$id_karyawan);
+     // membatasi hasil pencarian hanya untuk jam masuk dengan nilai '00:00:00'
      $this->db->where('jam_masuk !=','00:00:00');
+      // menggabungkan table user dengan absensi menggunakan left join
      $this->db->join('user','user.id = absensi.id_karyawan','left');
+     // menjalankan query untuk mengambil data ari table absensi
      $query = $this->db->get('absensi');
+     // mengambil query untuk object tunggal
      $result = $query->row();
+      // mengembalikan total jam masuk
      return $result->total_jam_masuk;
     }
     public function get_history($table, $id_karyawan)
@@ -49,6 +67,7 @@ class M_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    
     function getwhere($table, $data)
     {
         return $this->db->get_where($table, $data);
@@ -75,20 +94,8 @@ class M_model extends CI_Model
         $data = $this->db->update($tabel, $data, $where);
         return $this->db->affected_rows();
     }
-    public function get_siswa_foto_by_id($id_siswa)
-    {
-        $this->db->select('foto');
-        $this->db->from('siswa');
-        $this->db->where('id_siswa', $id_siswa);
-        $query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->row();
-            return $result->foto;
-        } else {
-            return false;
-        }
-    }
+    // untuk relasi nama depan dan nama belakang dri table user
     public function getAbsensiByIdKaryawan($idKaryawan)
     {
         $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
@@ -97,20 +104,22 @@ class M_model extends CI_Model
         $query = $this->db->get('absensi');
         return $query->result();
     }
-    public function get_by_date($date)
-    {
-        $this->db->select('id');
-        $this->db->from('absensi');
-        $this->db->where('date', $date);
-        $query = $this->db->get();
+    // public function get_by_date($date)
+    // {
+    //     $this->db->select('id');
+    //     $this->db->from('absensi');
+    //     $this->db->where('date', $date);
+    //     $query = $this->db->get();
 
-        if ($query->num_rows() > 0) {
-            $result = $query->row();
-            return $result->date;
-        } else {
-            return false;
-        }
-    }
+    //     if ($query->num_rows() > 0) {
+    //         $result = $query->row();
+    //         return $result->date;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    // izin hanya di perbolehkan 1 kali sesuai tgl
     public function izin_satu_kali($id)
     {
         $this->db->where('id_karyawan', $id);
@@ -118,6 +127,8 @@ class M_model extends CI_Model
         $query = $this->db->get('absensi');
         return $query->result();
     }
+
+    // rekap seminggu
     public function getAbsensiLast7Days()
     {
         $this->load->database();
@@ -132,6 +143,8 @@ class M_model extends CI_Model
             ->get();
         return $query->result_array();
     }
+
+    // untuk rekap perbulan
     public function getbulanan($bulan)
     {
         $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
@@ -142,6 +155,8 @@ class M_model extends CI_Model
         $result = $db->result();
         return $result;
     }
+
+    // untuk absensi rekap per hari
     public function getDailyData($date)
     {
         $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
@@ -150,26 +165,5 @@ class M_model extends CI_Model
         $this->db->where('date', $date);
         $query = $this->db->get();
         return $query->result();
-    }
-
-    public function tambah_izin($table, $data)
-    {
-        $this->db->insert($table, $data);
-        return $this->db->insert_id();
-    }
-    public function get_absen_by_tanggal($tanggal, $id_karyawan)
-    {
-        return $this->db->where('id_karyawan', $id_karyawan)
-            ->where('date', $tanggal)
-            ->where('keterangan_izin', '-')
-            ->where('status', 'not')
-            ->get('absensi');
-    }
-    public function get_izin_by_tanggal($tanggal, $id_karyawan)
-    {
-        return $this->db->where('id_karyawan', $id_karyawan)
-            ->where('date', $tanggal)
-            ->where('kegiatan', '-')
-            ->get('absensi');
     }
 }

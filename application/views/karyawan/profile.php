@@ -1071,13 +1071,14 @@
             <div class="page-header-image" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1557053819-aa6046add523?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80');">
             </div>
             <div class="container">
+                <!-- untuk menampilkan foto dri karyawan -->
                 <?php foreach ($user as $row) : ?>
                     <div class="photo-container">
                         <img src="<?php echo base_url('images/karyawan/' . $row->foto) ?>">
                     </div>
-                    <?php endforeach; ?>
-                    <h3 class="title"><?php echo $row->email ?></h3>
-                    <p class="category"><?php echo $row->username ?></p>
+                <?php endforeach; ?>
+                <h3 class="title"><?php echo $row->email ?></h3>
+                <p class="category"><?php echo $row->username ?></p>
             </div>
         </div>
         <div class="section">
@@ -1118,9 +1119,7 @@
         </div>
 
     </div>
-
-
-
+    
     <script>
         var transparent = true;
         var big_image;

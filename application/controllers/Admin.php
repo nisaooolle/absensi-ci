@@ -7,11 +7,12 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Admin extends CI_Controller
 {
 
-  // untuk meload model & helper kalian
   function __construct()
   {
     parent::__construct();
+    // m_model untuk menyambungkan ke file m_model
     $this->load->model('m_model');
+    // untuk menambahkan foto ke folder images admin
     $this->load->library('upload');
     // fungsi validasi dibawah untuk ngecek ketika masuk ke halaman admin , data sdh true atau blm
     // kalo blm true maka akan kembali ke page auth
@@ -21,7 +22,9 @@ class Admin extends CI_Controller
   }
   public function dasboard()
   {
-    $data['karya'] = $this->m_model->get_data('user')->num_rows();
+    //menghitung data user
+    $data['karya'] = $this->m_model->get_data('user')->num_rows(); 
+    // get data by id sesuai login admin
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
     $data['karyawan'] = $this->m_model->get_data('user')->result();
     $this->load->view('admin/dasboard', $data);
@@ -80,6 +83,7 @@ class Admin extends CI_Controller
 
     $no = 1;
     $numrow = 4;
+    // memanggil data dri database
     foreach ($data_karyawan as $data) {
       $sheet->setCellValue('A' . $numrow, $data->id);
       $sheet->setCellValue('B' . $numrow, $data->email);
@@ -585,7 +589,8 @@ class Admin extends CI_Controller
       redirect(base_url('admin/profile'));
     }
   }
-
+ 
+  // menambahkan foto ke folder images admin
   public function upload_images($value)
   {
     $kode = round(microtime(true)  * 1000);

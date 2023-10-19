@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
   <style>
-    body {
+   body {
   margin: 0;
   font-family: "Lucida Grande";
 }

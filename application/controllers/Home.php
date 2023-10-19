@@ -6,12 +6,9 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('m_model');
-		// $this->load->helper('my_helper');
 	}
 	public function index()
 	{
-		// $data['user'] = $this->m_model->get_data('admin')->result();
-		// $data['karyawan'] = $this->m_model->get_data('karyawan')->result();
 		$data['title'] = 'Home Page';
 		$this->load->view('home', $data);
 	}

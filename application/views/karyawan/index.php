@@ -488,6 +488,7 @@ td::before {
 }
 </style>
 <body>
+  <!-- sidebar -->
   <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
     <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
      <?php foreach ($user as $data_akun) : ?>
@@ -497,7 +498,6 @@ td::before {
           <h5 class="fs-6 mb-0">
             <a class="text-decoration-none" href="karyawan/profil"><?php echo $data_akun->username ?></a>
           </h5>
-          <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit amet consectetur.</p> -->
         </div>
       </div>
       <ul class="categories list-unstyled">
@@ -508,14 +508,10 @@ td::before {
         <i class="fa-solid fa-clock-rotate-left"></i><a href="karyawan/history_absen">History Absen</a>
       </li>
       <li>
-        <!-- <i class="fa-solid fa-bars"></i><a href="karyawan/menu_absensi"> Menu Absensi</a>
-      </li>
-      <li>
-        <i class="fa-solid fa-bars"></i><a href="karyawan/menu_izin">Menu Izin</a>
-      </li> -->
       </ul>
   </aside>
 
+  <!-- navbar -->
   <section id="wrapper">
     <nav class="navbar navbar-expand-md">
       <div class="container-fluid mx-2">
@@ -543,7 +539,6 @@ td::before {
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <!-- <i class="fa-solid fa-bars"></i> -->
                 <i data-show="show-side-navigation1" class="fa-solid fa-bars show-side-btn"></i>
               </a>
             </li>
@@ -561,6 +556,7 @@ td::before {
       </div>
     <?php endforeach; ?>
 
+    <!-- card -->
       <section class="statistics mt-4">
         <div class="row">
           <div class="col-lg-4">
@@ -596,6 +592,7 @@ td::before {
         </div>
       </section>
 
+      <!-- tabel karyawan -->
       <section class="charts mt-4">
         <div class="table">
           <table>
@@ -642,6 +639,7 @@ td::before {
         </div>
       </section>
       <script>
+         // untuk responsive sidebar dan fungsi dropdown saat responsive
         function $(selector) {
           return document.querySelector(selector)
         }

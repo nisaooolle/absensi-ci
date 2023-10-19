@@ -22,9 +22,8 @@ class Karyawan extends CI_Controller
     $data_karyawan = $this->m_model->getAbsensiByIdKaryawan($idKaryawan);
     $data['karyawan'] = $data_karyawan;
     $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
-    $data['absen'] = $this->m_model->get_history('absensi', $this->session->userdata('id'))->result();
     $data['total_absen'] = $this->m_model->get_absen($this->session->userdata('id'));
-    $data['total_izin'] = $this->m_model->get_izin('absensi', $this->session->userdata('id'))->num_rows();
+    $data['total_izin'] = $this->m_model->get_izin($this->session->userdata('id'));
     $data['karya'] = $this->m_model->get_data('user')->num_rows();
     $this->load->view('karyawan/index', $data);
   }

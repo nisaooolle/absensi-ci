@@ -1070,6 +1070,7 @@
         <div class="page-header clear-filter" filter-color="orange">
             <div class="page-header-image" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1557053819-aa6046add523?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80');">
             </div>
+            <!-- menampilkan foto dri admin -->
             <div class="container">
                 <?php foreach ($user as $row) : ?>
                     <div class="photo-container">
@@ -1080,6 +1081,8 @@
                 <p class="category"><?php echo $row->username ?></p>
             </div>
         </div>
+
+        <!-- tabel edit profil -->
         <div class="section">
             <div class="button-container">
                 <a href="#button" class="btn btn-primary btn-round btn-lg">Edit Profile</a>
@@ -1118,9 +1121,6 @@
         </div>
 
     </div>
-
-
-
     <script>
         var transparent = true;
         var big_image;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rekap Harian</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -492,6 +492,7 @@
 </style>
 
 <body>
+    <!-- sidebar -->
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
         <i class="fa-solid fa-xmark close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <?php foreach ($user as $data_akun) : ?>
@@ -522,6 +523,7 @@
             </ul>
     </aside>
 
+    <!-- navbar -->
     <section id="wrapper">
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid mx-2">
@@ -559,6 +561,7 @@
         </nav>
     <?php endforeach; ?>
 
+    <!-- tabel rekap harian & export -->
     <section class="charts mt-4">
         <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Rekap Harian</h2>
         <a href="<?php echo base_url('admin/export_rekap_harian') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
