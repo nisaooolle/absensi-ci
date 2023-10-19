@@ -1096,13 +1096,20 @@
                             <label for="nama" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo $data_akun->username ?>">
                         </div>
-                        <div class="mb-3 col-6">
-                            <label for="nama" class="form-label">Password Baru</label>
-                            <input type="text" class="form-control" id="password_baru" name="password_baru" placeholder="Password Baru">
+                        <div class="form-group mb-3 col-6">
+                            <label for="nama" class="form-label">Password lama</label>
+                            <input type="password" name="password_lama" id="password" class="form-control" placeholder="password Lama">
+                            <i class="password-toggle fa fa-eye-slash" onclick="togglePassword()"></i>
                         </div>
-                        <div class="mb-3 col-6">
-                            <label for="kelas" class="form-label">Konfirmasi Password</label>
-                            <input type="text" class="form-control" id="konfirmasi_password" name="konfirmasi_password" placeholder="Konfirmasi Password">
+                        <div class="form-group mb-3 col-6">
+                            <label for="nama" class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" id="password_baru" name="password_baru" placeholder="Password Baru">
+                            <i class="password-toggle fa fa-eye-slash" onclick="togglePasswordBaru()"></i>
+                        </div>
+                        <div class="form-group mb-3 col-6">
+                            <label for="nama" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password" placeholder="Konfirmasi Password">
+                            <i class="password-toggle fa fa-eye-slash" onclick="toggleKonfirPassword()"></i>
                         </div>
                         <div class="mb-3 col-6">
                             <label for="nama" class="form-label">Foto</label>
@@ -1119,7 +1126,7 @@
         </div>
 
     </div>
-    
+
     <script>
         var transparent = true;
         var big_image;
@@ -1371,7 +1378,54 @@
             };
         };
     </script>
+    <script type="text/javascript">
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var passwordToggle = document.querySelector('.password-toggle');
 
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            } else {
+                passwordField.type = "password";
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function togglePasswordBaru() {
+            var passwordField = document.getElementById('password_baru');
+            var passwordToggle = document.querySelector('.password-toggle');
+
+            if (passwordField.type === "password_baru") {
+                passwordField.type = "text";
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            } else {
+                passwordField.type = "password_baru";
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function toggleKonfirPassword() {
+            var passwordField = document.getElementById('konfirmasi_password');
+            var passwordToggle = document.querySelector('.password-toggle');
+
+            if (passwordField.type === "konfirmasi_password") {
+                passwordField.type = "text";
+                passwordToggle.classList.remove('fa-eye-slash');
+                passwordToggle.classList.add('fa-eye');
+            } else {
+                passwordField.type = "konfirmasi_password";
+                passwordToggle.classList.remove('fa-eye');
+                passwordToggle.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
 </body>
 
 

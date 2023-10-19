@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <style>
   img {
@@ -180,7 +182,7 @@
           <div class="top_link"><a href="/absensi-codeigniter3"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
           <div class="contact">
             <form action="<?php echo base_url(); ?>Auth/register_karyawan" method="post">
-              <h3>SIGN UP KARYAWAN</h3>
+              <h3>SIGN UP</h3>
               <input style="margin-top:25px" type="email" name="email" placeholder="EMAIL" required>
               <input type="username" name="username" placeholder="USERNAME" required>
               <div class="form-group">

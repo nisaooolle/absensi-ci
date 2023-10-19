@@ -191,11 +191,10 @@
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
                 <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
               </div>
+              <!-- <small>password harus 8 karakter</small> -->
               <div class="row">
-                <small>Belum memiliki akun ? silahkan <a href="auth/register_admin">Register</a></small>
+                <small>Belum memiliki akun ? silahkan <a href="auth/register_karyawan">Register</a></small>
               </div>
-              <!-- <a href="auth/register_admin" style="text-decoration: none; color: #6E7C7C;">Reg Admin</a> ||
-              <a href="auth/register_karyawan" style="text-decoration: none; color: #6E7C7C;">Reg Karyawan</a> -->
               <button class="submit" type="submit" name="submit">LET'S GO</button>
             </form>
           </div>
