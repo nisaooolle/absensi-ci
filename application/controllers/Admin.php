@@ -71,16 +71,14 @@ class Admin extends CI_Controller
     $sheet->setCellValue('A3', "ID");
     $sheet->setCellValue('B3', "EMAIL");
     $sheet->setCellValue('C3', "USERNAME");
-    $sheet->setCellValue('D3', "FOTO");
-    $sheet->setCellValue('E3', "NAMA DEPAN");
-    $sheet->setCellValue('F3', "NAMA BELAKANG");
+    $sheet->setCellValue('D3', "NAMA DEPAN");
+    $sheet->setCellValue('E3', "NAMA BELAKANG");
 
     $sheet->getStyle('A3')->applyFromArray($style_col);
     $sheet->getStyle('B3')->applyFromArray($style_col);
     $sheet->getStyle('C3')->applyFromArray($style_col);
     $sheet->getStyle('D3')->applyFromArray($style_col);
     $sheet->getStyle('E3')->applyFromArray($style_col);
-    $sheet->getStyle('F3')->applyFromArray($style_col);
 
     $data_karyawan = $this->m_model->get_data('user')->result();
 
@@ -91,16 +89,14 @@ class Admin extends CI_Controller
       $sheet->setCellValue('A' . $numrow, $data->id);
       $sheet->setCellValue('B' . $numrow, $data->email);
       $sheet->setCellValue('C' . $numrow, $data->username);
-      $sheet->setCellValue('D' . $numrow, $data->foto);
-      $sheet->setCellValue('E' . $numrow, $data->nama_depan);
-      $sheet->setCellValue('F' . $numrow, $data->nama_belakang);
+      $sheet->setCellValue('D' . $numrow, $data->nama_depan);
+      $sheet->setCellValue('E' . $numrow, $data->nama_belakang);
 
       $sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
       $sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
-      $sheet->getStyle('F' . $numrow)->applyFromArray($style_row);
 
       $no++;
       $numrow++;

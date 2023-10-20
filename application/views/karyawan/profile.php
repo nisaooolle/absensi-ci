@@ -1062,6 +1062,19 @@
             margin-top: 10px;
             font-size: 25px;
         }
+
+        .form-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+            right: 20px;
+            /* Anda bisa menyesuaikan jarak kanan sesuai kebutuhan */
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -1119,7 +1132,7 @@
                     </form>
                 <?php endforeach; ?>
                 <span class="back">
-                    <a href="/absensi-codeigniter3/karyawan"><i class="fa-solid fa-backward"></i>
+                    <a href="/absensi-codeigniter3/karyawan">Back
                     </a>
                 </span>
             </div>

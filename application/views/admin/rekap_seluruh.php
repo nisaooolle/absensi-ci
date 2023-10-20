@@ -543,7 +543,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="karyawan/profil">My account</a>
+                                    <a class="dropdown-item" href="profile">My account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">

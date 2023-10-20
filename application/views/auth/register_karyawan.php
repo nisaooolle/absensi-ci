@@ -181,18 +181,19 @@
         <div class="left">
           <div class="top_link"><a href="/absensi-codeigniter3"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
           <div class="contact">
-            <form action="<?php echo base_url(); ?>Auth/register_karyawan" method="post">
+            <form action="<?php echo base_url(); ?>Auth/register_karyawan" method="post" enctype="multipart/form-data">
               <h3>SIGN UP</h3>
               <input style="margin-top:25px" type="email" name="email" placeholder="EMAIL" required>
               <input type="username" name="username" placeholder="USERNAME" required>
-              <div class="form-group">
-                <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
-                <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
-              </div> <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
+              <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
               <input type="text" name="nama_belakang" placeholder="NAMA BELAKANG" required="">
               <input type="hidden" name="role" value="admin">
               <input type="hidden" name="foto" value="user.png">
-              <button class="submit">LET'S GO</button>
+              <div class="form-group">
+                <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
+                <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
+              </div>
+              <button class="submit">REGISTER</button>
             </form>
           </div>
         </div>

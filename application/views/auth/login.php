@@ -195,7 +195,7 @@
               <div class="row">
                 <small>Belum memiliki akun ? silahkan <a href="auth/register_karyawan">Register</a></small>
               </div>
-              <button class="submit" type="submit" name="submit">LET'S GO</button>
+              <button class="submit" type="submit" name="submit">LOGIN</button>
             </form>
           </div>
         </div>

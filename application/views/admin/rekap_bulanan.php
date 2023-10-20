@@ -500,7 +500,7 @@
                 <img src="<?php echo base_url('images/admin/' . $data_akun->foto) ?>" width="65" class="rounded-pill img-fluid">
                 <div class="ms-2">
                     <h5 class="fs-6 mb-0">
-                        <a class="text-decoration-none" href="profile"><?php echo $data_akun->username ?></a>
+                        <a class="text-decoration-none" href="admin/profile"><?php echo $data_akun->username ?></a>
                     </h5>
                     <!-- <p class="mt-1 mb-0">Lorem ipsum dolor sit amet consectetur.</p> -->
                 </div>
@@ -542,7 +542,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="karyawan/profil">My account</a>
+                                    <a class="dropdown-item" href="profile">My account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">

@@ -184,13 +184,14 @@
               <h3>SIGN UP ADMIN</h3>
               <input style="margin-top:25px" type="email" name="email" placeholder="EMAIL" required>
               <input type="username" name="username" placeholder="USERNAME" required>
+              <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
+              <input type="text" name="nama_belakang" placeholder="NAMA BELAKANG" required="">
+              <input type="hidden" name="role" value="admin">
               <div class="form-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
                 <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
-              </div> <input type="text" name="nama_depan" placeholder="NAMA DEPAN" required="">
-              <input type="text" name="nama_belakang" placeholder="NAMA BELAKANG" required="">
-              <input type="hidden" name="role" value="admin">
-              <button class="submit">LET'S GO</button>
+              </div>
+              <button class="submit">REGISTER</button>
             </form>
           </div>
         </div>
