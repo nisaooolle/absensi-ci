@@ -431,7 +431,7 @@
 
   .table td,
   .table th {
-    padding: 25px 30px;
+    padding: 25px 29px;
     text-align: left;
     font-size: 14px;
     cursor: pointer;
@@ -525,7 +525,7 @@ td::before {
           <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Settings
+              Account
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
@@ -548,12 +548,12 @@ td::before {
     </nav>
 
     <div class="p-4">
-      <div class="welcome">
+      <!-- <div class="welcome">
         <div class="content rounded-3 p-3">
           <h1 class="fs-3">Welcome to Dashboard</h1>
           <p class="mb-0">Hello <?php echo $data_akun->username ?>, welcome to your awesome dashboard!</p>
         </div>
-      </div>
+      </div> -->
     <?php endforeach; ?>
 
     <!-- card -->
@@ -561,7 +561,7 @@ td::before {
         <div class="row">
           <div class="col-lg-4">
             <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-              <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
+              <i class="fa-solid fa-house-laptop fs-2 text-center bg-primary rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
                   <h3 class="mb-0"><?php echo $total_absen ?></h3> <span class="d-block ms-2">Total Masuk Kerja</span>
@@ -571,7 +571,7 @@ td::before {
           </div>
           <div class="col-lg-4">
             <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-              <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
+             <i class="fa-solid fa-syringe fs-2 text-center bg-danger rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
                   <h3 class="mb-0"><?php echo $total_izin ?></h3> <span class="d-block ms-2">Total Cuti</span>
@@ -581,7 +581,7 @@ td::before {
           </div>
           <div class="col-lg-4">
             <div class="box d-flex rounded-2 align-items-center p-3">
-              <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
+              <i class="fa-solid fa-users fs-2 text-center bg-success rounded-circle"></i>
               <div class="ms-3">
                 <div class="d-flex align-items-center">
                   <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>

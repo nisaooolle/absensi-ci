@@ -577,6 +577,7 @@
                 </div>
             </div>
         </nav>
+        <div class="p-4">
 
         <!-- textarea kegiatan -->
         <div class="texta">

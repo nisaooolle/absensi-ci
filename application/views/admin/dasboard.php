@@ -560,33 +560,33 @@
     </nav>
 
     <div class="p-4">
-      <div class="welcome">
+      <!-- <div class="welcome">
         <div class="content rounded-3 p-3">
           <h1 class="fs-3">Welcome to Dashboard</h1>
           <p class="mb-0">Hello <?php echo $data_akun->username ?>, welcome to your awesome dashboard!</p>
         </div>
-      </div>
+      </div> -->
     <?php endforeach; ?>
 
     <section class="statistics mt-4">
       <div class="row">
-        <div class="col-lg-4">
-          <div class="box d-flex rounded-2 align-items-center p-3">
-            <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
-            <div class="ms-3">
-              <div class="d-flex align-items-center">
-                <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
+      <div class="col-lg-4">
+            <div class="box d-flex rounded-2 align-items-center p-3">
+              <i class="fa-solid fa-users fs-2 text-center bg-success rounded-circle"></i>
+              <div class="ms-3">
+                <div class="d-flex align-items-center">
+                  <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
 
     <!-- tabel data karyawan & export -->
     <section class="charts mt-4">
     <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Data Users</h2>
-      <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+      <!-- <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a> -->
       <br>
       <div class="table">
         <table>

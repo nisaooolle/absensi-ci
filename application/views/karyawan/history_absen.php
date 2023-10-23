@@ -432,7 +432,7 @@
 
     .table td,
     .table th {
-        padding: 20px 24px;
+        padding: 20px 20px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -579,6 +579,8 @@
                 </div>
             </div>
         </nav>
+        <div class="p-4">
+
         <!-- table -->
         <section class="charts mt-4">
             <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
