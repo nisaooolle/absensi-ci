@@ -189,7 +189,7 @@
               <input type="email" name="email" placeholder="EMAIL" required>
               <div class="form-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
-                <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
+                <i class="password-toggle fa fa-eye-slash" onclick="togglePassword()"></i>
               </div>
               <!-- <small>password harus 8 karakter</small> -->
               <div class="row">

@@ -77,6 +77,11 @@ class M_model extends CI_Model
         $data = $this->db->delete($table, array($field => $id));
         return $data;
     }
+
+    public function delete_relasi($userId) {
+        $this->db->where('id_karyawan' , $userId);
+        $this->db->delete('absensi');
+    }
     function tambah_data($tabel, $data)
     {
         $this->db->insert($tabel, $data);
@@ -104,20 +109,6 @@ class M_model extends CI_Model
         $query = $this->db->get('absensi');
         return $query->result();
     }
-    // public function get_by_date($date)
-    // {
-    //     $this->db->select('id');
-    //     $this->db->from('absensi');
-    //     $this->db->where('date', $date);
-    //     $query = $this->db->get();
-
-    //     if ($query->num_rows() > 0) {
-    //         $result = $query->row();
-    //         return $result->date;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     // izin hanya di perbolehkan 1 kali sesuai tgl
     public function izin_satu_kali($id)

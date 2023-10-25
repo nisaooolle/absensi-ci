@@ -191,7 +191,7 @@
               <input type="hidden" name="foto" value="user.png">
               <div class="form-group">
                 <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
-                <i class="password-toggle fa fa-eye" onclick="togglePassword()"></i>
+                <i class="password-toggle fa fa-eye-slash" onclick="togglePassword()"></i>
               </div>
               <button class="submit">REGISTER</button>
             </form>

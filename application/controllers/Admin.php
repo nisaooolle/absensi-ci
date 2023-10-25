@@ -32,6 +32,20 @@ class Admin extends CI_Controller
     $data['karyawan'] = $this->m_model->get_data('user')->result();
     $this->load->view('admin/dasboard', $data);
   }
+
+  public function data_users()
+  {
+    $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+    $data['karyawan'] = $this->m_model->get_data('user')->result();
+    $this->load->view('admin/data_users', $data);
+  }
+
+  public function hapus_users($id)
+  {
+    $this->m_model->delete_relasi($id);
+    $this->m_model->delete('user', 'id', $id);
+    redirect(base_url('admin/data_users'));
+  }
   // export user
   public function export()
   {
@@ -114,7 +128,7 @@ class Admin extends CI_Controller
 
     $sheet->setTitle("LAPORAN DATA KARYAWAN");
     header('Content-Type: aplication/vnd.openxmlformants-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="KARYAWAN.xlsx"');
+    header('Content-Disposition: attachment; filename="DATA USERS.xlsx"');
     header('Cache-Control: max-age=0');
 
     $writer = new Xlsx($spreadsheet);
@@ -548,46 +562,74 @@ class Admin extends CI_Controller
 
   public function aksi_akun()
   {
-    $foto = $this->upload_images('foto');
-    $email = $this->input->post('email');
-    $username = $this->input->post('username');
-    $password_baru = $this->input->post('password_baru');
-    $konfirmasi_password = $this->input->post('konfirmasi_password');
+      $password_lama = $this->input->post('password_lama', true);
 
-    $foto = $this->upload_images('foto');
-    if ($foto[0] == false) {
-      $data = [
-        'foto' => 'User.png',
-        'email' => $email,
-        'username' => $username,
-      ];
-    } else {
-      $data = [
-        'foto' => $foto[1],
-        'email' => $email,
-        'username' => $username,
-      ];
-    }
+      $user = $this->m_model->getWhere('user', ['id' => $this->session->userdata('id')])->row_array();
 
-    // jika ada pasword baru
-    if (!empty($password_baru)) {
-      // pastikan pasword sama
-      if ($password_baru === $konfirmasi_password) {
-        $data['password'] = md5($password_baru);
+      if (md5($password_lama) === $user['password']) {
+          $password_baru = $this->input->post('password_baru', true);
+          $konfirmasi_password = $this->input->post('konfirmasi_password', true);
+
+          // Pastikan password baru dan konfirmasi password sama
+          if ($password_baru === $konfirmasi_password) {
+              // Update password baru ke dalam database
+              $data = ['password' => md5($password_baru)];
+              $this->m_model->ubah_data('user', $data, ['id' => $this->session->userdata('id')]);
+
+              $this->session->set_flashdata('berhasil_ganti_password', 'Password berhasil diubah');
+              redirect(base_url('admin/profile'));
+          } else {
+              $this->session->set_flashdata('konfirmasi_pass', 'Password baru dan konfirmasi password harus sama');
+              redirect(base_url('admin/profile'));
+          }
       } else {
-        $this->session->set_flashdata('message', 'password baru dan konfirmasi password harus sama...');
-        redirect(base_url('admin/profile'));
+          $this->session->set_flashdata('pass_lama', 'Pastikan anda mengisi password lama anda dengan benar');
+          redirect(base_url('admin/profile'));
       }
-    }
-    // lakukan pembaruan data
-    $this->session->set_userdata($data);
-    $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-    if ($update_result) {
       redirect(base_url('admin/profile'));
-    } else {
-      redirect(base_url('admin/profile'));
-    }
   }
+  // public function aksi_akun()
+  // {
+  //   $foto = $this->upload_images('foto');
+  //   $email = $this->input->post('email');
+  //   $username = $this->input->post('username');
+  //   $password_baru = $this->input->post('password_baru');
+  //   $konfirmasi_password = $this->input->post('konfirmasi_password');
+
+  //   $foto = $this->upload_images('foto');
+  //   if ($foto[0] == false) {
+  //     $data = [
+  //       'foto' => 'User.png',
+  //       'email' => $email,
+  //       'username' => $username,
+  //     ];
+  //   } else {
+  //     $data = [
+  //       'foto' => $foto[1],
+  //       'email' => $email,
+  //       'username' => $username,
+  //     ];
+  //   }
+
+  //   // jika ada pasword baru
+  //   if (!empty($password_baru)) {
+  //     // pastikan pasword sama
+  //     if ($password_baru === $konfirmasi_password) {
+  //       $data['password'] = md5($password_baru);
+  //     } else {
+  //       $this->session->set_flashdata('message', 'password baru dan konfirmasi password harus sama...');
+  //       redirect(base_url('admin/profile'));
+  //     }
+  //   }
+  //   // lakukan pembaruan data
+  //   $this->session->set_userdata($data);
+  //   $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+  //   if ($update_result) {
+  //     redirect(base_url('admin/profile'));
+  //   } else {
+  //     redirect(base_url('admin/profile'));
+  //   }
+  // }
  
   public function aksi_ubah_profile()
   {

@@ -432,7 +432,7 @@
 
     .table td,
     .table th {
-        padding: 20px 20px;
+        padding: 20px 21px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -558,7 +558,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Settings
+                            Account
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
@@ -581,141 +581,141 @@
         </nav>
         <div class="p-4">
 
-        <!-- table -->
-        <section class="charts mt-4">
-            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
-            <div class="table">
-                <table>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Kegiatan</th>
-                        <th>Date</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Pulang</th>
-                        <th>Keterangan Izin</th>
-                        <th>Status</th>
-                        <th class="text-center">Action</th>
-                    </tr>
-                    <?php $no = 0;
-                    foreach ($karyawan as $row) : $no++ ?>
+            <!-- table -->
+            <section class="charts mt-4">
+                <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">History Absen</h2>
+                <div class="table">
+                    <table>
                         <tr>
-                            <td data-th="No">
-                                <?php echo $no ?>
-                            </td>
-                            <td data-th="Nama Karyawan">
-                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
-                            </td>
-                            <td data-th="Kegiatan">
-                                <?php echo $row->kegiatan; ?>
-                            </td>
-                            <td data-th="Date">
-                                <?php echo $row->date; ?>
-                            </td>
-                            <td data-th="Jam masuk">
-                                <?php echo $row->jam_masuk; ?>
-                            </td>
-                            <td data-th="Jam Pulang">
-                                <?php echo $row->jam_pulang; ?>
-                            </td>
-                            <td data-th="Keterangan izin">
-                                <?php echo $row->keterangan_izin; ?>
-                            </td>
-                            <td data-th="Status">
-                                <?php echo $row->status; ?>
-                            </td>
-                            <td class="text-end">
-                                <?php if ($row->status == "done") : ?>
-                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none">
-                                            <i class="fa-solid fa-check"></i></a>
-                                    </button>
-                                <?php elseif ($row->keterangan_izin != "-") : ?>
-                                    <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none"><i class="fa-solid fa-check"></i>
-                                        </a>
-                                    </button>
-                                <?php else : ?>
-                                    <button type="button" class="btn btn-sm btn-warning text-danger-hover"><a class="text-black text-decoration-none" href="<?php echo base_url('Karyawan/pulang/' . $row->id) ?>"><i class="fa-solid fa-check"></i>
-                                        </a>
-                                    </button>
-                                <?php endif; ?>
-                                <a href="<?php echo base_url('karyawan/menu_absensi/') . $row->id ?>" type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm edit"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button>
-                            </td>
+                            <th>No</th>
+                            <th>Nama Karyawan</th>
+                            <th>Kegiatan</th>
+                            <th>Date</th>
+                            <th>Jam Masuk</th>
+                            <th>Jam Pulang</th>
+                            <th>Keterangan Izin</th>
+                            <th>Status</th>
+                            <th class="text-center">Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </section>
-        <script>
-            // fungsi untuk mengapus data per id
-            function hapus(id) {
-                swal.fire({
-                    title: 'Yakin untuk menghapus data ini?',
-                    text: "Data ini akan terhapus permanen",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Batal',
-                    confirmButtonText: 'Ya Hapus'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil Dihapus',
-                            showConfirmButton: false,
-                            timer: 1500,
+                        <?php $no = 0;
+                        foreach ($karyawan as $row) : $no++ ?>
+                            <tr>
+                                <td data-th="No">
+                                    <?php echo $no ?>
+                                </td>
+                                <td data-th="Nama Karyawan">
+                                    <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                                </td>
+                                <td data-th="Kegiatan">
+                                    <?php echo $row->kegiatan; ?>
+                                </td>
+                                <td data-th="Date">
+                                    <?php echo $row->date; ?>
+                                </td>
+                                <td data-th="Jam masuk">
+                                    <?php echo $row->jam_masuk; ?>
+                                </td>
+                                <td data-th="Jam Pulang">
+                                    <?php echo $row->jam_pulang; ?>
+                                </td>
+                                <td data-th="Keterangan izin">
+                                    <?php echo $row->keterangan_izin; ?>
+                                </td>
+                                <td data-th="Status">
+                                    <?php echo $row->status; ?>
+                                </td>
+                                <td class="text-end">
+                                    <?php if ($row->status == "done") : ?>
+                                        <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none">
+                                                <i class="fa-solid fa-check"></i></a>
+                                        </button>
+                                    <?php elseif ($row->keterangan_izin != "-") : ?>
+                                        <button type="button" class="btn btn-sm btn-secondary text-danger-hover" disabled><a class="text-white text-decoration-none"><i class="fa-solid fa-check"></i>
+                                            </a>
+                                        </button>
+                                    <?php else : ?>
+                                        <button type="button" class="btn btn-sm btn-warning text-danger-hover"><a class="text-black text-decoration-none" href="<?php echo base_url('Karyawan/pulang/' . $row->id) ?>"><i class="fa-solid fa-check"></i>
+                                            </a>
+                                        </button>
+                                    <?php endif; ?>
+                                    <a href="<?php echo base_url('karyawan/menu_absensi/') . $row->id ?>" type="button" id="PopoverCustomT-1" class="btn btn-success btn-sm edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </section>
+            <script>
+                // fungsi untuk mengapus data per id
+                function hapus(id) {
+                    swal.fire({
+                        title: 'Yakin untuk menghapus data ini?',
+                        text: "Data ini akan terhapus permanen",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: 'Batal',
+                        confirmButtonText: 'Ya Hapus'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil Dihapus',
+                                showConfirmButton: false,
+                                timer: 1500,
 
-                        }).then(function() {
-                            window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/') ?>" + id;
-                        });
-                    }
-                });
-            }
-
-            // untuk responsive sidebar dan fungsi dropdown saat responsive
-            function $(selector) {
-                return document.querySelector(selector)
-            }
-
-            function find(el, selector) {
-                let finded
-                return (finded = el.querySelector(selector)) ? finded : null
-            }
-
-            function siblings(el) {
-                const siblings = []
-                for (let sibling of el.parentNode.children) {
-                    if (sibling !== el) {
-                        siblings.push(sibling)
-                    }
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/') ?>" + id;
+                            });
+                        }
+                    });
                 }
-                return siblings
-            }
 
-            const showAsideBtn = $('.show-side-btn')
-            const sidebar = $('.sidebar')
-            const wrapper = $('#wrapper')
-
-            showAsideBtn.addEventListener('click', function() {
-                $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
-                wrapper.classList.toggle('fullwidth')
-            })
-
-            if (window.innerWidth < 767) {
-                sidebar.classList.add('show-sidebar');
-            }
-
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 767) {
-                    sidebar.classList.remove('show-sidebar')
+                // untuk responsive sidebar dan fungsi dropdown saat responsive
+                function $(selector) {
+                    return document.querySelector(selector)
                 }
-            })
-            $('.sidebar .close-aside').addEventListener('click', function() {
-                $(`#${this.dataset.close}`).classList.add('show-sidebar')
-                wrapper.classList.remove('margin')
-            })
-        </script>
+
+                function find(el, selector) {
+                    let finded
+                    return (finded = el.querySelector(selector)) ? finded : null
+                }
+
+                function siblings(el) {
+                    const siblings = []
+                    for (let sibling of el.parentNode.children) {
+                        if (sibling !== el) {
+                            siblings.push(sibling)
+                        }
+                    }
+                    return siblings
+                }
+
+                const showAsideBtn = $('.show-side-btn')
+                const sidebar = $('.sidebar')
+                const wrapper = $('#wrapper')
+
+                showAsideBtn.addEventListener('click', function() {
+                    $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+                    wrapper.classList.toggle('fullwidth')
+                })
+
+                if (window.innerWidth < 767) {
+                    sidebar.classList.add('show-sidebar');
+                }
+
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 767) {
+                        sidebar.classList.remove('show-sidebar')
+                    }
+                })
+                $('.sidebar .close-aside').addEventListener('click', function() {
+                    $(`#${this.dataset.close}`).classList.add('show-sidebar')
+                    wrapper.classList.remove('margin')
+                })
+            </script>
 </body>
 
 </html>

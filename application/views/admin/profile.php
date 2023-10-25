@@ -1134,7 +1134,7 @@
                     </form>
                 <?php endforeach; ?>
                 <span class="back">
-                    <a href="/absensi-codeigniter3/admin/dasboard"><i class="fa-solid fa-backward"></i>
+                    <a href="/absensi-codeigniter3/admin/dasboard" style="text-decoration: none; font-size: 20px;">Back
                     </a>
                 </span>
             </div>

@@ -508,17 +508,30 @@
           <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
         </li>
         <li>
-          <i class="fa-solid fa-signal"></i><a href="rekap_seluruh">Rekapan Karyawan</a>
+          <i class="fa-solid fa-users"></i><a href="data_users">Data Users</a>
         </li>
-        <li>
-          <i class="fa-solid fa-signal"></i><a href="rekapan_harian">Rekapan Harian</a>
-        </li>
-        <li>
-          <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
-        </li>
-        <li>
-          <i class="fa-solid fa-signal"></i><a href="rekap_bulanan">Rekapan Bulanan</a>
-        </li>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#9CA3AF; margin-left: 30px; margin-top: 10px;"><i class="fa-solid fa-signal"></i>
+            Rekap Karyawan
+          </a>
+          <ul class="dropdown-menu categories list-unstyled" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a href="rekap_seluruh" class="dropdown-item">Seluruhnya</a>
+            </li>
+            <hr class="dropdown-divider">
+            <li>
+              <a href="rekapan_harian" class="dropdown-item">Harian</a>
+            </li>
+            <hr class="dropdown-divider">
+            <li>
+              <a href="rekap_mingguan" class="dropdown-item">Mingguan</a>
+            </li>
+            <hr class="dropdown-divider">
+            <li>
+              <a href="rekap_bulanan" class="dropdown-item">Bulanan</a>
+            </li>
+          </ul>
+        </div>
       </ul>
   </aside>
 
@@ -536,7 +549,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Settings
+                Account
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
@@ -570,22 +583,22 @@
 
     <section class="statistics mt-4">
       <div class="row">
-      <div class="col-lg-4">
-            <div class="box d-flex rounded-2 align-items-center p-3">
-              <i class="fa-solid fa-users fs-2 text-center bg-success rounded-circle"></i>
-              <div class="ms-3">
-                <div class="d-flex align-items-center">
-                  <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
-                </div>
+        <div class="col-lg-4">
+          <div class="box d-flex rounded-2 align-items-center p-3">
+            <i class="fa-solid fa-users fs-2 text-center bg-success rounded-circle"></i>
+            <div class="ms-3">
+              <div class="d-flex align-items-center">
+                <h3 class="mb-0"><?php echo $karya ?></h3> <span class="d-block ms-2">Total Users</span>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </section>
 
     <!-- tabel data karyawan & export -->
     <section class="charts mt-4">
-    <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Data Users</h2>
+      <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Data Users</h2>
       <!-- <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a> -->
       <br>
       <div class="table">

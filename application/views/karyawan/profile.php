@@ -1132,7 +1132,7 @@
                     </form>
                 <?php endforeach; ?>
                 <span class="back">
-                    <a href="/absensi-codeigniter3/karyawan">Back
+                <a href="/absensi-codeigniter3/admin/dasboard" style="text-decoration: none; font-size: 20px;">Back
                     </a>
                 </span>
             </div>
@@ -1407,7 +1407,7 @@
             }
         }
     </script>
-    <script type="text/javascript">
+    <script>
         function togglePasswordBaru() {
             var passwordField = document.getElementById('password_baru');
             var passwordToggle = document.querySelector('.password-toggle');
@@ -1423,7 +1423,7 @@
             }
         }
     </script>
-    <script type="text/javascript">
+    <script>
         function toggleKonfirPassword() {
             var passwordField = document.getElementById('konfirmasi_password');
             var passwordToggle = document.querySelector('.password-toggle');

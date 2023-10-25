@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rekap Harian</title>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
     @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet';
@@ -217,9 +218,7 @@
         color: var(--dk-gray-400)
     }
 
-    .charts a {
-        margin-left: 25px;
-    }
+
 
 
     /** --------------------------------
@@ -433,7 +432,7 @@
 
     .table td,
     .table th {
-        padding: 25px 41px;
+        padding: 25px 39px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -537,8 +536,8 @@
             </ul>
     </aside>
 
-    <!-- navbar -->
     <section id="wrapper">
+        <!-- navbar -->
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid mx-2">
                 <div class="navbar-header">
@@ -548,6 +547,7 @@
                     <a class="navbar-brand" href="#">admin<span class="main-color">kit</span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="toggle-navbar">
+
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -573,56 +573,84 @@
                 </div>
             </div>
         </nav>
+
         <div class="p-4">
-
+            <!-- <div class="welcome">
+        <div class="content rounded-3 p-3">
+          <h1 class="fs-3">Welcome to Dashboard</h1>
+          <p class="mb-0">Hello <?php echo $data_akun->username ?>, welcome to your awesome dashboard!</p>
+        </div>
+      </div> -->
         <?php endforeach; ?>
-
-        <!-- tabel rekap harian & export -->
+        <!-- tabel data karyawan & export -->
         <section class="charts mt-4">
-            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Rekap Harian</h2>
-            <a href="<?php echo base_url('admin/export_rekap_harian') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Data Users</h2>
+            <a href="<?php echo base_url('admin/export') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
             <br>
             <div class="table">
                 <table>
                     <tr>
                         <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Kegiatan</th>
-                        <th>Date</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Pulang</th>
-                        <th>Keterangan Izin</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Foto</th>
+                        <th>Nama Depan</th>
+                        <th>Nama Belakang</th>
+                        <th>Aksi</th>
                     </tr>
                     <?php $no = 0;
-                    foreach ($absensi as $row) : $no++ ?>
+                    foreach ($karyawan as $row) : $no++ ?>
                         <tr>
                             <td data-cell="No">
                                 <?php echo $no ?>
                             </td>
-                            <td data-cell="Nama Karyawan">
-                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                            <td data-cell="Email">
+                                <?php echo $row->email ?>
                             </td>
-                            <td data-cell="Kegiatan">
-                                <?php echo $row->kegiatan; ?>
+                            <td data-cell="Username">
+                                <?php echo $row->username; ?>
                             </td>
-                            <td data-cell="Date">
-                                <?php echo $row->date; ?>
+                            <td data-cell="Foto">
+                                <img src="<?php echo base_url('images/admin/' . $row->foto) ?>" width="50" alt="">
                             </td>
-                            <td data-cell="Jam masuk">
-                                <?php echo $row->jam_masuk; ?>
+                            <td data-cell="Nama Depan">
+                                <?php echo $row->nama_depan; ?>
                             </td>
-                            <td data-cell="Jam Pulang">
-                                <?php echo $row->jam_pulang; ?>
+                            <td data-cell="Nama Belakang">
+                                <?php echo $row->nama_belakang; ?>
                             </td>
-                            <td data-cell="Keterangan izin">
-                                <?php echo $row->keterangan_izin; ?>
-                            </td>
+                            <td><button onclick="hapus(<?php echo $row->id ?>)" type="button" id="PopoverCustomT-1" class="btn btn-danger btn-sm hapus"><i class="fa-solid fa-trash"></i></button></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
         </section>
         <script>
+            // fungsi untuk mengapus data per id
+            function hapus(id) {
+                    swal.fire({
+                        title: 'Yakin untuk menghapus data ini?',
+                        text: "Data ini akan terhapus permanen",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: 'Batal',
+                        confirmButtonText: 'Ya Hapus'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil Dihapus',
+                                showConfirmButton: false,
+                                timer: 1500,
+
+                            }).then(function() {
+                                window.location.href = "<?php echo base_url('admin/hapus_users/') ?>" + id;
+                            });
+                        }
+                    });
+                }
             function $(selector) {
                 return document.querySelector(selector)
             }

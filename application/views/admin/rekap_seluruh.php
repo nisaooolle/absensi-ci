@@ -434,7 +434,7 @@
 
     .table td,
     .table th {
-        padding: 25px 40px;
+        padding: 25px 37px;
         text-align: left;
         font-size: 14px;
         cursor: pointer;
@@ -511,17 +511,30 @@
                     <i class="fa-solid fa-table-columns"></i><a href="/absensi-codeigniter3/admin/dasboard">Dashboard</a>
                 </li>
                 <li>
-                    <i class="fa-solid fa-signal"></i><a href="rekap_seluruh">Rekapan Karyawan</a>
+                    <i class="fa-solid fa-users"></i><a href="data_users">Data Users</a>
                 </li>
-                <li>
-                    <i class="fa-solid fa-signal"></i><a href="rekapan_harian">Rekapan Harian</a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-signal"></i><a href="rekap_mingguan">Rekapan Mingguan</a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-signal"></i><a href="rekap_bulanan">Rekapan Bulanan</a>
-                </li>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#9CA3AF; margin-left: 30px; margin-top: 10px;"><i class="fa-solid fa-signal"></i>
+                        Rekap Karyawan
+                    </a>
+                    <ul class="dropdown-menu categories list-unstyled" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a href="rekap_seluruh" class="dropdown-item">Seluruhnya</a>
+                        </li>
+                        <hr class="dropdown-divider">
+                        <li>
+                            <a href="rekapan_harian" class="dropdown-item">Harian</a>
+                        </li>
+                        <hr class="dropdown-divider">
+                        <li>
+                            <a href="rekap_mingguan" class="dropdown-item">Mingguan</a>
+                        </li>
+                        <hr class="dropdown-divider">
+                        <li>
+                            <a href="rekap_bulanan" class="dropdown-item">Bulanan</a>
+                        </li>
+                    </ul>
+                </div>
             </ul>
     </aside>
 
@@ -539,7 +552,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Settings
+                                Account
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
@@ -563,96 +576,96 @@
         </nav>
         <div class="p-4">
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
-    <!-- tabel rekap seluruh & export -->
-    <section class="charts mt-4">
-        <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Rekap Keseluruhan</h2>
-        <a href="<?php echo base_url('admin/export_rekap_seluruh') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
-        <br>
-        <div class="table">
-            <table>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Karyawan</th>
-                    <th>Kegiatan</th>
-                    <th>Date</th>
-                    <th>Jam Masuk</th>
-                    <th>Jam Pulang</th>
-                    <th>Keterangan Izin</th>
-                </tr>
-                <?php $no = 0;
-                foreach ($absensi as $row) : $no++ ?>
+        <!-- tabel rekap seluruh & export -->
+        <section class="charts mt-4">
+            <h2 style="color:#6E7C7C;font-weight: bold; text-align: center;">Rekap Keseluruhan</h2>
+            <a href="<?php echo base_url('admin/export_rekap_seluruh') ?>" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm ">Export</a>
+            <br>
+            <div class="table">
+                <table>
                     <tr>
-                        <td data-cell="No">
-                            <?php echo $no ?>
-                        </td>
-                        <td data-cell="Nama Karyawan">
-                            <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
-                        </td>
-                        <td data-cell="Kegiatan">
-                            <?php echo $row->kegiatan; ?>
-                        </td>
-                        <td data-cell="Date">
-                            <?php echo $row->date; ?>
-                        </td>
-                        <td data-cell="Jam masuk">
-                            <?php echo $row->jam_masuk; ?>
-                        </td>
-                        <td data-cell="Jam Pulang">
-                            <?php echo $row->jam_pulang; ?>
-                        </td>
-                        <td data-cell="Keterangan izin">
-                            <?php echo $row->keterangan_izin; ?>
-                        </td>
+                        <th>No</th>
+                        <th>Nama Karyawan</th>
+                        <th>Kegiatan</th>
+                        <th>Date</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Pulang</th>
+                        <th>Keterangan Izin</th>
                     </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
-    </section>
-    <script>
-        function $(selector) {
-            return document.querySelector(selector)
-        }
+                    <?php $no = 0;
+                    foreach ($absensi as $row) : $no++ ?>
+                        <tr>
+                            <td data-cell="No">
+                                <?php echo $no ?>
+                            </td>
+                            <td data-cell="Nama Karyawan">
+                                <?php echo $row->nama_depan . ' ' . $row->nama_belakang; ?>
+                            </td>
+                            <td data-cell="Kegiatan">
+                                <?php echo $row->kegiatan; ?>
+                            </td>
+                            <td data-cell="Date">
+                                <?php echo $row->date; ?>
+                            </td>
+                            <td data-cell="Jam masuk">
+                                <?php echo $row->jam_masuk; ?>
+                            </td>
+                            <td data-cell="Jam Pulang">
+                                <?php echo $row->jam_pulang; ?>
+                            </td>
+                            <td data-cell="Keterangan izin">
+                                <?php echo $row->keterangan_izin; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </section>
+        <script>
+            function $(selector) {
+                return document.querySelector(selector)
+            }
 
-        function find(el, selector) {
-            let finded
-            return (finded = el.querySelector(selector)) ? finded : null
-        }
+            function find(el, selector) {
+                let finded
+                return (finded = el.querySelector(selector)) ? finded : null
+            }
 
-        function siblings(el) {
-            const siblings = []
-            for (let sibling of el.parentNode.children) {
-                if (sibling !== el) {
-                    siblings.push(sibling)
+            function siblings(el) {
+                const siblings = []
+                for (let sibling of el.parentNode.children) {
+                    if (sibling !== el) {
+                        siblings.push(sibling)
+                    }
                 }
+                return siblings
             }
-            return siblings
-        }
 
-        const showAsideBtn = $('.show-side-btn')
-        const sidebar = $('.sidebar')
-        const wrapper = $('#wrapper')
+            const showAsideBtn = $('.show-side-btn')
+            const sidebar = $('.sidebar')
+            const wrapper = $('#wrapper')
 
-        showAsideBtn.addEventListener('click', function() {
-            $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
-            wrapper.classList.toggle('fullwidth')
-        })
+            showAsideBtn.addEventListener('click', function() {
+                $(`#${this.dataset.show}`).classList.toggle('show-sidebar')
+                wrapper.classList.toggle('fullwidth')
+            })
 
-        if (window.innerWidth < 767) {
-            sidebar.classList.add('show-sidebar');
-        }
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 767) {
-                sidebar.classList.remove('show-sidebar')
+            if (window.innerWidth < 767) {
+                sidebar.classList.add('show-sidebar');
             }
-        })
-        $('.sidebar .close-aside').addEventListener('click', function() {
-            $(`#${this.dataset.close}`).classList.add('show-sidebar')
-            wrapper.classList.remove('margin')
-        })
-    </script>
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 767) {
+                    sidebar.classList.remove('show-sidebar')
+                }
+            })
+            $('.sidebar .close-aside').addEventListener('click', function() {
+                $(`#${this.dataset.close}`).classList.add('show-sidebar')
+                wrapper.classList.remove('margin')
+            })
+        </script>
 </body>
 
 </html>
